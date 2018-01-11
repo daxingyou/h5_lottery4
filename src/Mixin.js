@@ -5,10 +5,6 @@
 //mixin.js
 // var  API_ROOT ='http://api.88bccp.com';
 
-
-import playTreeList from './PlayTreeList'
-import playTreeIndexByCid from './PlayTreeIndexByCid'
-
 var MyMixin = {
     data:function(){
         return {
@@ -30,7 +26,6 @@ var MyMixin = {
                 rootBalance:'',
             },
             playTreeList:[], //玩法树
-            playTreeIndexByCid: {},     
             testPriodDataNewlyData:{
               "data" : [ {
                 "version" : 0,
@@ -255,47 +250,19 @@ var MyMixin = {
             }
         },
 
-
         // 玩法树
         loadPlayTree:function(gameid) {
             var _self = this ;
             return new Promise((resolve, reject)=>{
-                let maxUpdateTime = ""
-                let playTree
-
-                /* if browser support localStorage */
-                if (typeof(Storage) !== "undefined") {
-                    // Code for localStorage/sessionStorage.
-                    playTree = JSON.parse(localStorage.getItem("playTree" + gameid))
-                    if (playTree) {
-                        if (localStorage.getItem("maxUpdateTime" + gameid))
-                            maxUpdateTime = localStorage.getItem("maxUpdateTime" + gameid)
-                    }
-                }
                 $.ajax({
                     type: 'get',
                     headers: {
                         "Authorization": "bearer  " + _self.getAccessToken,
                     },
                     url: this.action.forseti + 'api/playsTree',
-                    data: {lotteryId: gameid, maxUpdateTime: maxUpdateTime}, // 当前彩种id
-                    dataType: 'json',
+                    data: {lotteryId: gameid,}, // 当前彩种id
                     success: (res) => {
-                        let mydata
-                        if (res.data) {
-                            localStorage.setItem("playTree" + gameid, JSON.stringify(res.data.childrens))
-                            localStorage.setItem("maxUpdateTime" + gameid, res.maxUpdateTime)
-                            mydata = res.data.childrens
-                        }
-                        else {
-                            mydata = playTree
-                        }
-
-                        playTreeList.set(mydata)
-                        playTreeIndexByCid.set(mydata)
-                        this.$set(this, 'playTreeList', mydata)
-                        this.$set(this, 'playTreeIndexByCid', mydata)
-
+                        this.playTreeList = res.data ? res.data.childrens :[];
                      setTimeout(function () {
                          _self.setInitHeight(gameid) ;
                      },200) ;
@@ -311,7 +278,6 @@ var MyMixin = {
             });
 
         },
-
 
         // 最新开奖期数
         priodDataNewly:function(gameid, sys_time) {
@@ -429,7 +395,6 @@ var MyMixin = {
             var leftTopHeight = $('.so-l-c-top').height();
             $('.so-l-c-con').height((viewHeight - leftTopHeight) + 'px');
         },
-  
 
         //禁止遮罩层以下屏幕滑动
         touchmove :function(){

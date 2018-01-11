@@ -3,8 +3,6 @@ const path = require('path')
 const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
-const webpack = require('webpack')
-
 
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
@@ -28,11 +26,6 @@ module.exports = {
       '@': resolve('src'),
     }
   },
-   plugins: [
-        new webpack.ProvidePlugin({
-            _: 'lodash',
-        }),
-    ],
   module: {
     rules: [
       {
@@ -69,10 +62,6 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
-      },
-      {
-            test: /\.json$/,
-            loader: 'json-loader'
       }
     ]
   }
