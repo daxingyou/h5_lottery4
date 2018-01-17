@@ -64,7 +64,7 @@ input, select, button, a { outline: none; }
 .new_btn span{  width: 3rem;  display: block; text-align: center; border-radius: 0.5rem; /*background: url('/static/frist/images/btn_bg.svg') no-repeat center center; background-size: auto 100%; */ }
 .new_btn.cancel { border-color: #cbcbcb; color: #1db5f7; background-color: #fff;}
 /*.new_btn.cancel span{ width: 2.2rem; }*/
-.new_btn.ok span{ width: 3rem; }
+.new_btn.ok span{ width: 3rem;  }
 .new_btn span.midunm { width: 4.35rem; line-height: 0.8rem; }
 .new_btn span.big { width: 6rem; line-height: 0.8rem; }
 .new_btn_outline { color: #fff;  border: 1px solid #fff; border-radius: 0.5rem; display: inline-block; font-size: .34rem; padding: 0 0.2rem; line-height: 0.7rem; }
@@ -199,6 +199,7 @@ label.red { color: #bc0000; text-align: left; display: block; margin-top: .2rem;
 .agent_area { padding-top: 0.3rem; }
 .agent p { line-height: 1.8em; margin-bottom: .3em; font-size: 0.35rem; }
 .agent section { margin: 1.5em 0; }
+.agent .tab-panels{ padding: 0.3rem 0;}
 /*.agent div { width: 90%; margin: 0 auto; }*/
 .agent .btn_blue { margin-bottom: .5rem; }
 .agent_check input[type="checkbox"] { font-size: 0.35rem !important; width: .3rem; height: .3rem; vertical-align: middle; }
@@ -208,10 +209,10 @@ label.red { color: #bc0000; text-align: left; display: block; margin-top: .2rem;
 .data td, .agent table td, .data th, .agent table th { border: 1px solid #ececec; padding: .2rem; text-align: center; vertical-align: middle; }
 .data th, .agent table th { color: #fff; }
 
-.tabset { text-align: center; }
+.tabset { text-align: center; font-size: 0; }
 .tabset > input[type="radio"] { position: absolute; left: -200vw; }
 .tabset .tab-panel { display: none; }
-.tabset > label { position: relative; display: inline-block;margin-left: -4px; padding: .27rem 0rem; cursor: pointer; color: #1db5f7; border: 1px solid #1db5f7; font-size: 0.34rem; width: 33%; }
+.tabset > label { font-size: 0.34rem; position: relative; display: inline-block;margin-left: -1px; padding: .27rem 0rem; cursor: pointer; color: #1db5f7; border: 1px solid #1db5f7; font-size: 0.34rem; width: 33%; }
 .tabset > label:first-of-type {  border-top-left-radius: .2rem; border-bottom-left-radius: .2rem; }
 .tabset > label:last-of-type { border-top-right-radius: .2rem; border-bottom-right-radius: .2rem; }
 .tabset > input:first-child:checked ~ .tab-panels > .tab-panel:first-child, .tabset > input:nth-child(3):checked ~ .tab-panels > .tab-panel:nth-child(2), .tabset > input:nth-child(5):checked ~ .tab-panels > .tab-panel:nth-child(3), .tabset > input:nth-child(7):checked ~ .tab-panels > .tab-panel:nth-child(4), .tabset > input:nth-child(9):checked ~ .tab-panels > .tab-panel:nth-child(5), .tabset > input:nth-child(11):checked ~ .tab-panels > .tab-panel:nth-child(6) { display: block; }
@@ -242,12 +243,21 @@ img.fixbot { position: fixed; bottom: 0; margin: 0 auto; width: 100%; left: 0; m
 
 .last-open-dou { margin-left: -.1rem; }
 
-/* 关於我们 */
+/* -----------------------------------------
+// 关於我们
+-----------------------------------------*/
 .about_area { text-align: left; width: 90%; margin: 0 auto; padding: 1.5rem 0; font-size: .35rem; }
-.about_area p { margin: .5rem 0; }
+.about_area p { margin: .3rem 0; line-height: 1.5em; }
 .about_area h5 { margin: .5rem 0; color: #bc0000; }
 
-/* 优惠活动 */
+/* -----------------------------------------
+// 新手教程
+-----------------------------------------*/
+.tutorial_area .tab-box{padding: 0.3rem 0;}
+
+/* -----------------------------------------
+// 优惠活动
+-----------------------------------------*/
 .promo_area { text-align: left; width: 9.4rem; margin: 0 auto; padding: 0.3rem; font-size: .34rem; line-height: 1.7em; }
 .promo_area .promo_list {}
 .promo_area .promo_list.active .promo_detail{ display: block;}
@@ -499,8 +509,8 @@ p.active .sixlot_ball.num_39, p.active .sixlot_ball.num_43, p.active .sixlot_bal
 .so-in-main .so-main-down ul { text-align: right;}
 .so-in-main .so-main-down ul li { display: inline-block; vertical-align: top;}
 .so-in-main .so-main-down ul li:first-child{ width: 3.42rem; float: left; }
-.so-in-main .so-main-down ul li:nth-child(2) { margin-right: 0.5rem;width: 24%; text-align: center}
-.so-in-main .so-main-down ul li:nth-child(3) { margin-right: 0.3rem;width: 24%; text-align: center}
+.so-in-main .so-main-down ul li:nth-child(2) { margin-right: 0.3rem;width: 30%; text-align: center}
+.so-in-main .so-main-down ul li:nth-child(3) { margin-right: 0.3rem;width: 30%; text-align: center}
 .so-in-main .so-main-down ul li:after{ content:''; display: table; clear:both;}
 .so-in-main .so-main-down ul li > p { line-height:0.8rem; text-align:right; /*width:3.3rem;*/ font-size:.34rem; }
 .so-in-main .so-main-down ul li > i { display: none; }
@@ -613,8 +623,9 @@ img.bet_ok { position: absolute; width: 100%; top: -2rem; left: 0; z-index: 1; }
 .bet_data > a { display: block; color: #2b2b2b; }
 .bet_data > a:after { content: ''; display: table; clear: both; }
 .bet_data > a > .item { padding: .3rem 0; overflow: hidden; /*width: 9rem;*/ box-sizing: border-box;}
-.bet_data > a > .item > div { display: inline-block; vertical-align: middle; line-height: .6rem; }
-.bet_data > a > .item > .status { float: right; max-width: 1.8rem; width: auto; }
+.bet_data > a > .item > div { display: inline-block; vertical-align: middle; line-height: .5rem; }
+.bet_data > a > .item > .status { float: right; max-width: 1.8rem; width: auto; white-space: nowrap; }
+.bet_data > a > .item > .status .reword{display: inline-block; color: #71c341; margin-left: -4px; letter-spacing: -1px;}
 /*.bet_data > a > .item > .badge {  border-radius: 1rem; width: 1.5rem; height: 1.5rem; margin-right:0.15rem; }*/
 .bet_data > a > .item img { width: 1.5rem; margin-right: 0.2rem; }
 .bet_data strong { color: #ffbd00; font-size: .35rem; font-weight: 300; max-width: 2.8rem; display: inline-block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; vertical-align: top; }
@@ -627,7 +638,7 @@ img.bet_ok { position: absolute; width: 100%; top: -2rem; left: 0; z-index: 1; }
 .bet_data .status02 { padding-top: .2rem; color: #71c341; }
 .bet_data .status03, .bet_data .status04 { color: #b41a17; padding-top: .3rem; }
 .bet_data .status03 > span, .bet_data .status04 > span { position: relative; top: 0.5rem; }
-.bet_data .status03 > div, .bet_data .status04 > div { display: block; background-image: url("/static/frist/images/icon_sprite.svg"); background-size: 6.4rem auto; background-position: -5.76rem -1.92rem; text-align: center; margin: 0 auto; width: .5rem; height: .5rem; position: relative; top: -0.6rem; }
+.bet_data .status03 > div, .bet_data .status04 > div { display: block; background-image: url("/static/frist/images/icon_sprite.svg"); background-size: 6.4rem 2.56rem; background-position: -5.76rem -1.92rem; text-align: center; margin: 0 auto; width: .64rem; height: .64rem; position: relative; top: -0.6rem; }
 
 
 
@@ -679,7 +690,7 @@ img.bet_ok { position: absolute; width: 100%; top: -2rem; left: 0; z-index: 1; }
 -----------------------------------------*/
 
 .ds_long  { -webkit-border-radius: 0.2rem; -moz-border-radius: 0.2rem; -ms-border-radius: 0.2rem; font-size: .4rem; }
-.ds_long ul.lo_ball { width: 2.5rem; color: #1db5f7; }
+.ds_long ul.lo_ball { width: 3.5rem; color: #1db5f7; }
 .ds_long ul.lo_ball.two { width: auto; }
 .ds_long .prod { background-color: #fff; margin-bottom: 0.2rem; }
 .ds_long .prod:after{ content: ''; display: table; clear: both; }

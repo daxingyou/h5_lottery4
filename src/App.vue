@@ -10,6 +10,7 @@
 <script>
 // import FastClick from 'fastclick'
 import '../static/frist/css/page.css'
+import '../static/frist/css/shenzhou_page.css'
 import Mixin from '@/Mixin'
 
 const FastClick = require('fastclick');

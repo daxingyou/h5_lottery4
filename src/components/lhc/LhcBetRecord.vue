@@ -2,16 +2,18 @@
     <div id="pa_con"  class="body lhc">
         <header id="pa_head" class="new_header">
             <div class="left">
-                <a href="javascript:;" onclick="history.go(-1) ">
+                <!-- <a href="javascript:;" onclick="history.go(-1) "> -->
+                <a href="javascript:;" @click="backToIndex">
                     <span class="icon icon_back"></span>
                 </a>
             </div>
+
             <h2 class="center lottery_name">{{lotteryname}} 投注记录</h2>
             <div class="right">
                 <div class="dropdown_icon"><span class="icon icon_filter"></span>筛选</div>
             </div>
         </header>
-        <div class="dropdown" style="display:none;">
+        <div class="dropdown" style="display:none;" id = 'lhc_choose'>
             <div class="play_area">
                 <div class="sort">
                     <h5>游戏筛选</h5>
@@ -30,12 +32,13 @@
 
                     </ul>
                     <div>
-                        <div class="btn_outline"><a class="new_btn" href="javascript:;"><span>取消</span></a></div>
+                        <div class="btn_outline"><a class="new_btn first_cancel" href="javascript:;"><span>取消</span></a></div>
                         <div class="btn_submit"><a class="new_btn ok" href="javascript:;"><span>确定</span></a></div>
                     </div>
                 </div>
             </div>
         </div>
+
 
         <div id="pa_content">
             <div id="betting_record" class="tab_container tabBox">
@@ -90,11 +93,23 @@
                                                         status04
                                                         用户撤单、系统撤单、中奖停追、存在异常、异常注单 
                                                         -->
+                                                      <!--   <div :class="showStatusClass(item2.orderstatus)">
+                                                            <span>{{item2.orderstatusname}}</span>
+                                                            <div v-if="item2.orderstatus == 32">{{item2.payoff}}</div>
+                                                            <div v-else></div>
+                                                        </div> -->
+
                                                         <div :class="showStatusClass(item2.orderstatus)">
                                                             <span><!-- orderStatus: -->{{item2.orderstatusname}}</span>
                                                             <div v-if="item2.orderstatus == 32"><!-- 若己派彩則顯示 payoff：XXXX.X元 -->{{item2.payoff}}</div>
                                                             <div v-else></div>
+                                                            <!--  <p v-if = ' item2.playId=="1012"&&(item2.orderstatusname=="已中奖"||item2.orderstatusname=="未中奖")  ' class="reword">返点：</p> -->
+                                                            <p v-if=' rewardShow(item2) ' class="reword">返点：</p>
+                                                            <!--  <p v-if = 'item2.playId=="1012"&&(item2.orderstatusname=="已中奖"||item2.orderstatusname=="未中奖") ' class="reword">{{roundAmt(item2.reforwardPoint)}}元</p> -->
+                                                            <p v-if=' rewardShow(item2) ' class="reword">
+                                                                {{roundAmt(item2.reforwardPoint)}}元</p>
                                                         </div>
+
                                                     </div>
                                                 </a>
                                             </li>
@@ -376,8 +391,29 @@
 
         },/*mounted*/
         watch: {
+            
         },
         methods: {
+
+            // 左上角返回键
+            backToIndex:function(){
+
+                console.log( this.lotteryid )
+                if(this.lotteryid == 10){
+                    this.$router.push('/lhc')
+                }else{
+                    history.go(-1)                    
+                }
+            },
+              rewardShow: function (item2) {
+                var rewardFlag = false
+                rewardFlag = item2.playId == "1012" && (item2.orderstatusname == "已中奖" || item2.orderstatusname == "未中奖" || item2.orderstatusname == "已派彩" )
+                var t = rewardFlag              
+                var isNum = Number(item2.playname.substring(item2.playname.length - 2, item2.playname.length))
+                var numFlag = (isNum <= 49) && (isNum >= 0)
+                rewardFlag = rewardFlag && numFlag
+                return rewardFlag
+            },
             showClass(stat) {
                 let classStr = "slide_toggle bet_day new_bet_day new_panel"
 
@@ -487,9 +523,17 @@
                                         if (betDataObj.orderstatus == 32) {
                                             betDataObj.payoff = _self.fortMoney(_self.roundAmt(betData.payoff), 2) + '元'
                                         }
-                                        betDataObj.orderid = betData.orderId
+                                        // betDataObj.orderid = betData.orderId
+                                        // betDataObj.betcontent = betData.betContent
+                                        // betDataObj.playname = betData.playName
+                                        // _self.betRecordList[pdate].push(betDataObj)
+
+                                         betDataObj.orderid = betData.orderId
                                         betDataObj.betcontent = betData.betContent
                                         betDataObj.playname = betData.playName
+                                        betDataObj.cid = betData.cid                                        
+                                        betDataObj.reforwardPoint = betData.reforwardPoint                                        
+                                        betDataObj.playId = betData.playId.toString().substr(0,4)
                                         _self.betRecordList[pdate].push(betDataObj)
                                     })
                                 }
@@ -599,5 +643,10 @@
     .swiper-container {
             height: 100%;
         }
+    #lhc_choose .first_cancel {
+        border-color: #cbcbcb;
+        color: #1db5f7;
+        background-color: #fff;
+    }
 </style>
 
