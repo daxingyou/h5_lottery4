@@ -193,18 +193,25 @@ footer.bot_nav ul li.active a, footer.bot_nav > ul > li:hover a, footer.bot_nav 
 /* -----------------------------------------
 // 大厅
 -----------------------------------------*/
-
+#index_content.content > section h3{border-bottom: none;}
 /* banner */
 /* 跑马灯 */
 /* 快速连结 */
+.account_area{margin-bottom: 0;}
 
 /* 热门游戏 */
-.hotgame_area { background:url(/static/frist/images/bg_hotgame.jpg) no-repeat; background-size: 100% 100%; margin-bottom: 0.2rem; padding: 0.4rem 0.2rem;}
+.hotgame_area {  background:url(/static/frist/images/bg_hotgame.jpg) no-repeat ; background-size: 100% 100%; margin-bottom: 0rem; padding: 0.4rem 0.2rem;}
 .hotgame_area ul > li { width: 2.5rem; margin: 0.2rem; border-bottom: none; background-color: rgba(255, 255, 255, 0.8); border-radius: 0.1rem; box-shadow: 0 0 0px 1px #69a7c8; }
 .hotgame_area .badge { width: auto; }
 
 /* 合作加盟 */
+.cooper_area .cooper{margin: 0; margin-bottom: 0.3rem; background-color: #224e6b;}
+.cooper_area .cooper > ul > li a { color: #fff; text-decoration: underline;}
+
 /* 优惠活动 */
+.promoindex_area { background-color: #224e6b;}
+.promoindex_area h3 a{ color: #fff; border: 0; text-decoration: underline;}
+.promoindex_area h3 a:after{ content: ' >';}
 .promo_area img{ width: 9rem; margin: 0px auto;} 
 .promo_area .promo_list li h3{ float: none; text-align: center;}
 .promo_area .promo_list .btn_detail{text-align: center;}
@@ -223,7 +230,7 @@ footer.bot_nav ul li.active a, footer.bot_nav > ul > li:hover a, footer.bot_nav 
 .page_login .new_panel{background-color: transparent;}
 .login_area .new_btn{ width: 100%; margin: 0; box-sizing: border-box; color: #fff; background-color:#3cb5ec; border:none; }
 .login_area .new_btn span{ width: auto; line-height: 1rem;}
-.login_title{ top: 7.8rem;}
+.login_title{ top: 7.6rem; background-image: url(/static/frist/images/login_logo.gif); height: 60px;}
 .other_link > a{border-color: #aaaaaa;}
 
 /* -----------------------------------------
@@ -246,6 +253,9 @@ footer.bot_nav ul li.active a, footer.bot_nav > ul > li:hover a, footer.bot_nav 
 .info_top .account .user_name .purse .so-in-top-sum { color: #4f4f4f; }
 
 /* 帐户管理 */
+.password_area > div::after{ display: table; clear: both; content: '';}
+.password_area > div > div { margin-top: 0.3rem; display: block; float: left; width: 48%;}
+.password_area > div > div:first-child{margin-right: 4%;}
 .info_personal input{ background-color: #fff; border: 1px solid #aaaaaa; border-radius: 0.1rem;}
 .info_personal a{ float: right; color: #3cb5ec; }
 .info_mid > div > div:first-child{display: block; float: left;}
