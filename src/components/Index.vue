@@ -117,14 +117,14 @@
                   <li v-for="(lottery,index) in allLottery" v-if="index<10"   > <!-- 只展示前面10个 -->
                     <router-link class="to_lottery" :to="'/'+gameHref[lottery.cid]" v-if="haslogin">
                       <div :class="'badge'">
-                        <img v-lazy="action.picurl+lottery.imgUrl+'/0'">
-                           <!--<img v-lazy="'static/frist/images/lotteryicon/cp'+lottery.cid+'.png'">-->
+                        <!--<img v-lazy="action.picurl+lottery.imgUrl+'/0'">-->
+                           <img v-lazy="'static/frist/images/lotteryicon/cp'+lottery.cid+'.png'">
                       </div>
                     </router-link>
                       <a class="to_lottery" @click="gotoGame(haslogin)"  v-else>
                           <div :class="'badge'">
-                                <img v-lazy="action.picurl+lottery.imgUrl+'/0'">
-                              <!--<img v-lazy="'static/frist/images/lotteryicon/cp'+lottery.cid+'.png'">-->
+                                <!--<img v-lazy="action.picurl+lottery.imgUrl+'/0'">-->
+                              <img v-lazy="'static/frist/images/lotteryicon/cp'+lottery.cid+'.png'">
                           </div>
                       </a>
                     <p>{{lottery.name}}</p>
