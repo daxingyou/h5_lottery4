@@ -255,7 +255,8 @@ p.active .xy28_ball.num_3, p.active .xy28_ball.num_6, p.active .xy28_ball.num_9,
 .page_login .new_panel{background-color: transparent;}
 .login_area .new_btn{ width: 100%; margin: 0; box-sizing: border-box; color: #fff; background-color:#3cb5ec; border:none; }
 .login_area .new_btn span{ width: auto; line-height: 1rem;}
-.login_title{ top: 7.6rem; background-image: url(/static/frist/images/login_logo.gif); height: 60px;}
+.login_title{ top: 7.6rem; /*background-image: url(/static/frist/images/login_logo.gif);*/ height: 60px;}
+.login_title:after{ content: ''; display: block; position: absolute; left: 1.8rem; top: 0.02rem; width: 1.067rem; height: 0.5733rem; background: url(/static/frist/images/logo_fire.gif) no-repeat; background-size: 100% 100%; }
 .other_link > a{border-color: #aaaaaa;}
 
 /* -----------------------------------------
