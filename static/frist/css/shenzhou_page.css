@@ -291,11 +291,13 @@ p.active .xy28_ball.num_3, p.active .xy28_ball.num_6, p.active .xy28_ball.num_9,
 .info_bot > ul > li > a .icon_account{ background-color: #fff; box-shadow: 0px 0px 0px 1px #3cb5ec inset; -webkit-box-shadow: 0px 0px 0px 1px #3cb5ec inset;}
 
 /* 个人消息 */
-.message_area .item {  border-color: #ececec;color: #3cb5ec; }
+.message_area .item {  border-color: #ececec; }
+.message_area .item .badge { border: 1px solid #3cb5ec; background-color: transparent;}
 .message_area .item a{ color: #3cb5ec; }
-.message_area .item.read { color: #bababa; opacity: 1; }
+.message_area .item .title h2{ color: #3cb5ec; }
+/*.message_area .item.read { color: #bababa; opacity: 1; }
 .message_area .item.read a { color: #bababa; }
-.message_area .item.read .badge{box-shadow: 0 0 0 1px #bababa inset;}
+.message_area .item.read .badge{box-shadow: 0 0 0 1px #bababa inset;}*/
 
 /* 帐户明细 状态标签 */
 
