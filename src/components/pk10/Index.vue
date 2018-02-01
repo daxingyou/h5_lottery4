@@ -53,11 +53,11 @@
                                         <li>{{lastTermStatic.top2_total}}</li>
                                         <li>{{lastTermStatic.top2_sizer}}</li>
                                         <li>{{lastTermStatic.top2_doubler}}</li>
-                                        <li>{{lastTermStatic.lh_5}}</li>
-                                        <li>{{lastTermStatic.lh_4}}</li>
-                                        <li>{{lastTermStatic.lh_3}}</li>
-                                        <li>{{lastTermStatic.lh_2}}</li>
                                         <li>{{lastTermStatic.lh_1}}</li>
+                                        <li>{{lastTermStatic.lh_2}}</li>
+                                        <li>{{lastTermStatic.lh_3}}</li>
+                                        <li>{{lastTermStatic.lh_4}}</li>
+                                        <li>{{lastTermStatic.lh_5}}</li>
 
                                     </ul>
                                 </div>
@@ -258,7 +258,6 @@
     import Bet from '@/components/publicTemplate/Bet'
     import PlayDialog from '@/components/pk10/PlayDialog'
     import Mixin from '@/Mixin'
-    import store from './../../_vuex/store'
 
 export default {
     name: 'pk10Index',
@@ -343,9 +342,7 @@ export default {
                 this.balancePublic = afterBetCookie
                 console.log(afterBetCookie)      
         },
-        bgFocus: function () {
-          this.$store.commit('Number')
-        },
+       
         switchTab:function(e){
             var _self = this ;
             const $src = $(e.currentTarget);

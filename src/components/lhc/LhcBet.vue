@@ -83,8 +83,6 @@
 </template>
 
 <script>
-    import store from './../../_vuex/store.js'
-
     import Mixin from '@/Mixin'
     import betContentList from '@/components/lhc/BetOrderContent.json' //此檔案內容是用來對下注內容調整給後端派彩
 
@@ -202,9 +200,7 @@
             },
         },
         mounted() {
-            this.$store.commit('Hold')
-            console.log(this.$store )
-            console.log(this )
+           
         },
         watch:{
             betSelectedList() {
@@ -401,6 +397,7 @@
                 _.forEach(this.betSelectedList, getBetContent)
             },
             startBet(e) {
+                this.betAmount = Number( this.betAmount ) ?Number( this.betAmount ) :''                              
                 let amount = this.betAmount;  // 获取金额
                 const closet = 4;
                 // if(nums<1){ // 没有选择投注项目
