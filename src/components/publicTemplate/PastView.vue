@@ -57,7 +57,7 @@
                                             <li>{{list.doubleData.lh_5}}</li>
 
                                         </ul>
-                                        <ul class="double-count" v-else-if="(lotteryid == '10')"> <!-- 上面一排数据 -->
+                                        <ul class="double-count" v-else-if="(lotteryid == '10')||(lotteryid == '110')"> <!-- 上面一排数据 -->
                                         </ul>
                                         <ul class="double-count" v-else>
                                             <li>{{list.doubleData.total}}</li>
