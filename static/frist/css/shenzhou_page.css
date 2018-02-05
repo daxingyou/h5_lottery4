@@ -119,6 +119,7 @@ p.active .xy28_ball.num_3, p.active .xy28_ball.num_6, p.active .xy28_ball.num_9,
 .bet_panel p.active .round_ball{ background-image: url(/static/frist/images/ball/round_active.png); color: #fff;}
 
 /* 11x5 样式微调 */
+.jx11_tab.hd ul.tab_mid { border-radius: 0;}
 .jx11_tab.hd ul.tab_mid > li.on a{ color: #3cb5ec;}
 
 /* 快3 样式微调 */
