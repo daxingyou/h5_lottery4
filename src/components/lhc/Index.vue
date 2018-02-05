@@ -92,6 +92,8 @@
 
             <BetSuccessfulDialog ref="betSuccessfulDialog" />
             <PlayDialog ref="playDialog" :moduleName="moduleName" :moduleplay="moduleplay" />
+            <WfPlayDialog ref="playDialog" :moduleName="moduleName" :moduleplay="moduleplay" v-if='lotteryID=="110" '/>
+            
         </div><!-- so-con -->
 </template>
 
@@ -107,6 +109,7 @@
     import MenuBar from '@/components/publicTemplate/MenuBar'
     import LhcBet from '@/components/lhc/LhcBet'
     import PlayDialog from '@/components/lhc/PlayDialog'
+    import WfPlayDialog from '@/components/lhc/WfPlayDialog'    
     import Mixin from '@/Mixin'
     import PlayMethodBar from '@/components/lhc/PlayMethodBar'
     import Touzhu from '@/components/lhc/Touzhu'
@@ -125,6 +128,7 @@
             InfoDialog,
             AutoCloseDialog,
             PlayDialog,
+            WfPlayDialog,            
             PlayMethodBar,
             Touzhu
         },
@@ -271,7 +275,6 @@
                                     that.previous_pcode = res.data[1].pcode                                
                                 }  
                                 code = res.data[1].winNumber.split(',')
-                                console.log(code,'noopencode')
                                 that.winNumber = code
 
                             }
@@ -289,7 +292,6 @@
                                         that.previous_pcode = res.data[1].pcode                                 
                                     }  
                                     code = res.data[1].winNumber.split(',')
-                                    console.log(code, 'code,ordinary')
                                     that.winNumber = code
                                 } else {
                                     that.now_time = that.formatTimeUnlix(res.data[1].endTime); // 当前期数时间
@@ -304,7 +306,6 @@
                                     }    
                                     code = res.data[2].winNumber.split(',')
                                     that.winNumber = code
-                                    console.log(code, 'code,pass')
                                 }
 
                                 //code 上期开奖号码
