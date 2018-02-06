@@ -135,7 +135,7 @@
 
                                     <div class="bank_transfer">
                                         <div class="before_pay">
-                                            <fieldset>
+                                          <!--   <fieldset>
                                                 <div class="form_g text">
                                                     <legend>选择银行</legend>
                                                     <select name="" v-model="bankInfo.bankCode">
@@ -144,7 +144,7 @@
                                                     </select>
                                                     <span class="icon icon_arrow_down"></span>
                                                 </div>
-                                            </fieldset>
+                                            </fieldset> -->
                                         </div>
 
                                         <div class="bank_account"  id='bankInforDeposit'>
@@ -529,10 +529,6 @@
                     url: _self.action.forseti + 'api/pay/receiptClient',
                     // data: { type: type},  // 查询类型：1 扫码支付，2 银行卡支付
                     success: function(res){
-                        //  console.log(res)
-                        // console.log( res.data.splice(0,4) )
-//                        res.data = res.data;
-//                    console.log(res.data)
                         _self.payWays = res.data;
                     },
                     error: function (e) {
@@ -603,7 +599,6 @@
                                 _self.submitpayflag = false ;
                                 if(res.data.dataType=='1'){ // 页面html
                                     var loadStr = res.data.html ;
-//                               console.log(loadStr) ;
                                     win.document.write(loadStr) ;
                                 }else if(res.data.dataType=='2'){ // 链接跳转
                                     var loadurl = res.data.url ;
@@ -728,7 +723,6 @@
                             _self.userInfo = res.data ;
                         } else {
                             _self.bankSubmitAllow = false;
-                            // console.log(_self.bankSubmitAllow, 'allow')
                         }
 
                     },
@@ -761,10 +755,8 @@
             submitBankAction:function () {
                 var _self = this ;
                 if( _self.submitpayunflag){
-                    console.log('发货的')
                     return false ;
                 }
-                console.log('和积分抵扣')
                 
                 if (!(this.bankSubmitAllow)) {
                     _self.$refs.autoCloseDialog.open('未获取到收款人信息');
@@ -783,7 +775,6 @@
                     _self.$refs.autoCloseDialog.open('请选择存款方式！') ;
                     return false ;
                 }
-                console.log( _self.depositPeopleHint  ,'dfasf')
                 if(_self.depositPeopleHint){
                     _self.$refs.autoCloseDialog.open('输入正确的存款人姓名！') ;
                     return false ;
@@ -814,7 +805,6 @@
                     url: _self.action.forseti + 'api/pay/offlineOrder',
                     data: senddata ,
                     success: function(res){
-                        console.log(res)
 
                         if(!res.data){
                             _self.$refs.autoCloseDialog.open(res.msg) ;
@@ -864,12 +854,7 @@
                 var $src = $(e.currentTarget);
                 var claName = $src.data('claName');
 
-                // console.log(claName, 'name')
-                // console.log($src, 'src')
-                // console.log($src[0].classList.value, 'src0')
-                // console.log('.'+$src[0].classList.value )
                 var str = '.' + $src[0].classList.value
-                // console.log(str, 'str')
 
                 // var clipboard = new Clipboard('.text_name') ;
                 var clipboard = new Clipboard(str);
@@ -910,12 +895,10 @@
                     data: senddata,
                     success: function(res){ // dataType 1 线上入款 , 3 二维码
                         if(res.err == 'SUCCESS'){
-                            console.log('seccess')
                             if(type == '1'){ // 线上付款
                                 _self.submitpayflag = false ;
                                 if(res.data.dataType=='1'){ // 页面html
                                     var loadStr = res.data.html ;
-//                               console.log(loadStr) ;
                                     win.document.write(loadStr) ;
                                 }else if(res.data.dataType=='2'){ // 链接跳转
                                     $('.paymethods_all').show();
@@ -923,7 +906,6 @@
                                     win.location.href = loadurl ;
                                 }
                             }else if(type == '3'){  // 扫码支付
-                                console.log(!res.data + 'chongshi')
                                 if(!res.data){
                                     _self.$refs.autoCloseDialog.open('请重试！') ;
                                     setTimeout(function () {
