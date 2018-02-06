@@ -104,6 +104,7 @@ export default {
       
      $(this.el).on('click', ()=>{
       this.showNavigation = true;
+      $('html,body').css({'height':'100%','overflow-y':'hidden'}) ;       
     }) ;
 
   },
@@ -111,6 +112,7 @@ export default {
       // 关闭侧滑栏
     close:function(e){
       this.showNavigation = false;
+      $('html,body').css({'height':'auto','overflow-y':'scroll'}) ;
     },
       // 获取彩种
       getLotterys:function() {

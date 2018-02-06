@@ -113,22 +113,10 @@
 
             $(this.el).on('click', ()=>{
                 this.showNavigation = true;
-
-                that.mainIndexBalance = that.getCookie('balancePublic');
-                console.log(  this.mainIndexBalance )
-                // 调接口获取数据 添加到用户余额   
-
-                // console.log(that.lotteryID) 
-                // console.log(that.sys_time) 
-  //               that.priodDataNewly(that.lotteryID, sys_time).then(res=>{
-  // 334                      that.ishwowpriod = true ;           
-
-
-
+                that.mainIndexBalance = that.getCookie('balancePublic');               
                 $('html,body').css({'height':'100%','overflow-y':'hidden'}) ; // 禁止页面滚动
             }) ;
              this.getCustom()
-
         },
         methods:{
             // 关闭侧滑栏
