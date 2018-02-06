@@ -120,7 +120,7 @@
         },
         methods:{
             // 关闭侧滑栏
-            close:function(e){
+            close:function(){
                 this.showNavigation = false;
                 $('html,body').css({'height':'auto','overflow-y':'scroll'}) ;
             },
