@@ -382,11 +382,10 @@
                 return this.getListByParentID(43000);
             },
           },
-          methods:{
-             refreshBalance:function(){
-                var afterBetCookie = this.getCookie( 'balancePublic' )
-                this.balancePublic = afterBetCookie
-                console.log(afterBetCookie)      
+          methods:{            
+             refreshBalance:function(newBalance){
+                this.balancePublic = newBalance
+                this.getMemberBalance(this.lotteryID)
             },
              
             betCountStat:function(xslen, xlen){

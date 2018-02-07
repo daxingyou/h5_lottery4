@@ -298,10 +298,9 @@ export default {
   },
 
   methods:{
-    refreshBalance:function(){
-        var afterBetCookie = this.getCookie( 'balancePublic' )
-        this.balancePublic = afterBetCookie
-        // console.log(afterBetCookie)      
+    refreshBalance:function(newBalance){
+        this.balancePublic = newBalance
+        this.getMemberBalance(this.lotteryID)
     },
      bgFocus: function () {
           var bb = $('.body_bg')[0]

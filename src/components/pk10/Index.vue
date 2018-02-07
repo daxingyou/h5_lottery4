@@ -336,13 +336,11 @@ export default {
             return this.getListByParentID(84000);
         },
     },
-    methods:{
-         refreshBalance:function(){
-                var afterBetCookie = this.getCookie( 'balancePublic' )
-                this.balancePublic = afterBetCookie
-                console.log(afterBetCookie)      
-        },
-       
+    methods:{       
+         refreshBalance:function(newBalance){
+            this.balancePublic = newBalance
+            this.getMemberBalance(this.lotteryID)
+        },       
         switchTab:function(e){
             var _self = this ;
             const $src = $(e.currentTarget);
