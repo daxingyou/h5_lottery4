@@ -231,8 +231,6 @@ export default {
                     this.ajaxSubmitAllow = false;
                 }
             });
-
-
         },
 
         /*
