@@ -428,6 +428,7 @@ export default {
      //获得优惠活动接口
       getActivity : function () {
 
+          var _self=this;
               $.ajax({
                   type: 'get',
                   url: _self.action.forseti + 'apid/cms/activity',
@@ -442,8 +443,9 @@ export default {
                   err: (res) => {
 
                   }
-              })
+              })  
 
+         
       },
       setCid:function (e) {
           var _self = this;
