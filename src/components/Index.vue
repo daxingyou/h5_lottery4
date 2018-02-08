@@ -428,8 +428,6 @@ export default {
      //获得优惠活动接口
       getActivity : function () {
 
-          var _self=this;
-          if (!sessionStorage.propActivityList) {
               $.ajax({
                   type: 'get',
                   url: _self.action.forseti + 'apid/cms/activity',
@@ -446,13 +444,6 @@ export default {
                   }
               })
 
-          } else {
-              var activity_prop = JSON.parse(sessionStorage.propActivityList)
-              if (activity_prop) {
-                  _self.picture = _self.action.picurl + activity_prop[0].titlePic + '/0';
-                  _self.cid = activity_prop[0].cid
-              }
-          }
       },
       setCid:function (e) {
           var _self = this;
