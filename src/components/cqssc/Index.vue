@@ -366,7 +366,7 @@ export default {
                     that.ishwowpriod = true ;
                     that.next_pcode = res.data[0].pcode;  // 下期期数
                     var OpenFlag1 = ( sys_time > res.data[1].endTime )&&(sys_time < res.data[0].startTime)                   
-
+                    var OpenFlag = (sys_time > res.data[0].startTime&&sys_time < res.data[0].endTime)
                     var firstpcode = res.data[0].pcode.toString().substr(8, 11) ;
                     let code = res.data[2].winNumber;
                     if(firstpcode =='024' && that.lotteryID == '2'){  // 重庆时时彩 白天第一期
@@ -462,6 +462,15 @@ export default {
                         that.nowover_time = that.formatTimeUnlix(res.data[0].prizeCloseTime);  // 当前期封盘时间
                         that.now_pcode = res.data[0].pcode;  // 当前期数
 
+                        that.winNumber = res.data[1].winNumber;
+                        that.lastTermStatic = res.data[1].doubleData;    //上期开奖统计
+                        that.previous_pcode = res.data[1].pcode;  // 上期期数
+                    }
+                    if( that.lotteryID == '2'&& OpenFlag&&firstpcode =='001'){
+                        that.notopen = false ;
+                        that.now_time = that.formatTimeUnlix(res.data[0].endTime);  // 当前期数时间
+                        that.nowover_time = that.formatTimeUnlix(res.data[0].prizeCloseTime);  // 当前期封盘时间
+                        that.now_pcode = res.data[0].pcode;  // 当前期数
                         that.winNumber = res.data[1].winNumber;
                         that.lastTermStatic = res.data[1].doubleData;    //上期开奖统计
                         that.previous_pcode = res.data[1].pcode;  // 上期期数
