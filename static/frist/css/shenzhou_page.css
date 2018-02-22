@@ -1,0 +1,339 @@
+/* -----------------------------------------
+// init
+-----------------------------------------*/
+
+body {color: #4f4f4f;}
+a { color: #3cb5ec;}
+
+/* -----------------------------------------
+// common
+-----------------------------------------*/
+/* 全局背景 */
+/* 卷轴颜色 */
+.playtext::-webkit-scrollbar-thumb{background-color: #3cb5ec;}
+
+/* font color */
+.text-red{ color: #ff0000;}
+
+/* 馀额 */
+/* btn */
+.new_btn{ border-radius: 0.1rem; color: #3cb5ec; border-color:#3cb5ec; background-color: #fff;}
+.new_btn.cancel, .new_btn.kind{ color: #4f4f4f; border-color:#aaaaaa;}
+.new_btn.ok{color: #3cb5ec; background-color: #fff; border-color: #3cb5ec;}
+
+/* panel */
+.new_panel .new_panel_top{ color: #4f4f4f;}
+.new_panel .new_panel_tip {color: #ff0000; text-align: center;}
+
+/* -----------------------------------------
+// layout
+-----------------------------------------*/
+/* header */
+.new_header { background: #3cb5ec; background: -moz-linear-gradient(top, #3cb5ec 0%, #69c7f1 100%); background: -webkit-linear-gradient(top, #3cb5ec 0%,#69c7f1 100%); background: linear-gradient(to bottom, #3cb5ec 0%,#69c7f1 100%); }
+.new_header.index_nav_top{background: url('/static/frist/images/bg_gradient.png') repeat-x #3ab6ec; background-size: auto 100%;}
+
+/* 投注页 header */
+.purse {padding-left: 0.3rem; min-width: 3rem; margin-left: 0.7rem; border:none; height: 0.54rem; line-height: 0.54rem;}
+.purse .icon_money{ background-color: transparent; box-shadow: none; left: -0.7rem;}
+.purse .so-in-top-sum{ color: #3cb5ec;}
+/* content */
+
+/* footer */
+footer{ background-color: #f2f3f7; }
+footer.bot_nav ul li { width: 25%; height: 1.36rem; }
+footer.bot_nav ul li.active, footer.bot_nav > ul > li:hover, footer.bot_nav > ul > li:focus { background: url('/static/frist/images/bg_gradient.png') repeat-x #3ab6ec; background-size: auto 100%;}
+footer.bot_nav ul li.active a, footer.bot_nav > ul > li:hover a, footer.bot_nav > ul > li:focus a { color: #fff;}
+
+
+/* 左侧选单 */
+.so-left .so-l-c-top{background: url('/static/frist/images/bg_gradient.png') repeat-x #3ab6ec; background-size: auto 100%;}
+
+/* 弹窗样式 */
+.modal .m_content .check { color: #3cb5ec;}
+.playtext h4 { color: #3cb5ec; }
+
+/*-------------------------------------------------
+// 代理申请
+------------------------------------------------- */
+.data thead, .agent table thead { background-color: #3cb5ec; }
+
+.tabset {font-size: 0;}
+.tabset > label { font-size: 0.34rem; color: #3cb5ec; border-color:#3cb5ec; }
+.tabset > label:hover, .tabset > input:focus + label { color: #3cb5ec; }
+.tabset > label:hover::after, .tabset > input:focus + label::after, .tabset > input:checked + label::after { background: #06c; }
+.tabset > input:checked + label {  background-color: #3cb5ec; color: #fff; }
+
+.tab-panel h4 { color: #3cb5ec;  }
+
+/* 代理注册 */
+/* 关於我们 */
+/* 优惠活动 */
+.promo_area h3 { color: #3cb5ec;}
+
+/* -----------------------------------------
+// icon
+-----------------------------------------*/
+
+/* -----------------------------------------
+// bet lottery
+-----------------------------------------*/
+/* round ball */
+.round_ball{ border: none; font-size:0.46rem; font-weight: bold; background:url(/static/frist/images/ball/round.png) no-repeat; background-size: 100% 100%; color: #6c6c6c; box-shadow: 2px 2px 1px rgba(134, 134, 134, 0.3); }
+.round_ball:after{display: none;}
+.round_ball.active, p.active .round_ball{ background:url(/static/frist/images/ball/round_lottery.png) no-repeat; background-size: 100%; border:none; color: #4f2b21; }
+
+/* k3 ball */
+.k3_dice{ box-shadow: none;}
+
+/* pk10 ball */
+.pk10_ball.num_1, .pk10_ball.num_01 { background-color: #e5dd48; }
+.pk10_ball.num_2, .pk10_ball.num_02 { background-color: #3d91d7; }
+.pk10_ball.num_3, .pk10_ball.num_03 { background-color: #4b4b4b; }
+.pk10_ball.num_4, .pk10_ball.num_04 { background-color: #ef7e2f; }
+.pk10_ball.num_5, .pk10_ball.num_05 { background-color: #68dee3; }
+.pk10_ball.num_6, .pk10_ball.num_06 { background-color: #4a41f5; }
+.pk10_ball.num_7, .pk10_ball.num_07 { background-color: #bfbfbf; }
+.pk10_ball.num_8, .pk10_ball.num_08 { background-color: #eb4223; }
+.pk10_ball.num_9, .pk10_ball.num_09 { background-color: #6e1a0a; }
+.pk10_ball.num_10{ background-color: #57ba37; }
+
+/* 幸运28 ball */
+.xy28_ball{border: none; background:url(/static/frist/images/ball/round.png) no-repeat; background-size: 100% 100%; color: #6c6c6c; border-radius: 1rem; display: inline-block; width: 0.9rem; height: 0.9rem; line-height: 0.9rem; font-size: 0.5rem; text-align: center; overflow: hidden; position: relative; box-shadow: 2px 2px 1px rgba(134, 134, 134, 0.3);}
+.xy28_ball:after{ content: ''; display: block; width: 100%; height: 100%; position: absolute; top: -40%; left: 15%; border-radius: 50%; background-color: #fff; opacity: 0.2; }
+.xy28_ball.num_0, .xy28_ball.num_13, .xy28_ball.num_14, .xy28_ball.num_27 {color: #fff;border-color: transparent; background:url(/static/frist/images/ball/round_gray.png) no-repeat;background-size: 100% 100%;}
+.xy28_ball.num_1, .xy28_ball.num_4, .xy28_ball.num_7, .xy28_ball.num_10, .xy28_ball.num_16, .xy28_ball.num_19, .xy28_ball.num_22, .xy28_ball.num_25{color: #fff;border-color: transparent; background:url(/static/frist/images/ball/round_green.png) no-repeat;background-size: 100% 100%;}
+.xy28_ball.num_2, .xy28_ball.num_5, .xy28_ball.num_8, .xy28_ball.num_11, .xy28_ball.num_17, .xy28_ball.num_20, .xy28_ball.num_23, .xy28_ball.num_26{color: #fff;border-color: transparent; background:url(/static/frist/images/ball/round_active.png) no-repeat;background-size: 100% 100%;}
+.xy28_ball.num_3, .xy28_ball.num_6, .xy28_ball.num_9, .xy28_ball.num_12, .xy28_ball.num_15, .xy28_ball.num_18, .xy28_ball.num_21, .xy28_ball.num_24{color: #fff;border-color: transparent; background:url(/static/frist/images/ball/round_red.png) no-repeat;background-size: 100% 100%;}
+p.active .xy28_ball.num_0, p.active .xy28_ball.num_13, p.active .xy28_ball.num_14, p.active .xy28_ball.num_27,
+.xy28_ball.num_0.active, .xy28_ball.num_13.active, .xy28_ball.num_14.active, .xy28_ball.num_27.active,
+p.active .xy28_ball.num_1, p.active .xy28_ball.num_4, p.active .xy28_ball.num_7, p.active .xy28_ball.num_10, p.active .xy28_ball.num_16, p.active .xy28_ball.num_19, p.active .xy28_ball.num_22, p.active .xy28_ball.num_25,
+.xy28_ball.num_1.active, .xy28_ball.num_4.active, .xy28_ball.num_7.active, .xy28_ball.num_10.active, .xy28_ball.num_16.active, .xy28_ball.num_19.active, .xy28_ball.num_22.active, .xy28_ball.num_25.active,
+p.active .xy28_ball.num_2, p.active .xy28_ball.num_5, p.active .xy28_ball.num_8, p.active .xy28_ball.num_11, p.active .xy28_ball.num_17, p.active .xy28_ball.num_20, p.active .xy28_ball.num_23, p.active .xy28_ball.num_26,
+.xy28_ball.num_2.active, .xy28_ball.num_5.active, .xy28_ball.num_8.active, .xy28_ball.num_11.active, .xy28_ball.num_17.active, .xy28_ball.num_20.active, .xy28_ball.num_23.active, .xy28_ball.num_26.active,
+p.active .xy28_ball.num_3, p.active .xy28_ball.num_6, p.active .xy28_ball.num_9, p.active .xy28_ball.num_12, p.active .xy28_ball.num_15, p.active .xy28_ball.num_18, p.active .xy28_ball.num_21, p.active .xy28_ball.num_24,
+.xy28_ball.num_3.active, .xy28_ball.num_6.active, .xy28_ball.num_9.active, .xy28_ball.num_12.active, .xy28_ball.num_15.active, .xy28_ball.num_18.active, .xy28_ball.num_21.active, .xy28_ball.num_24.active
+{color: #fff;background-color: transparent;box-shadow: 2px 2px 1px rgba(134, 134, 134, 0.3);}
+
+/* bet panel */
+.bet_panel .bet_box p.active{background:url(/static/frist/images/bg_gradient.png) repeat-x #3ab6ec; background-size: auto 100%;}
+.bet_panel p.active .round_ball{ background-image: url(/static/frist/images/ball/round_active.png); color: #fff;}
+
+/* 11x5 样式微调 */
+.jx11_tab.hd ul.tab_mid { border-radius: 0;}
+.jx11_tab.hd ul.tab_mid > li.on a{ color: #3cb5ec;}
+
+/* 快3 样式微调 */
+/* pk10 样式微调 */
+.bet_panel .bet_box.num_box p .pk10_ball{ transform: translate(0,-0.03rem) }
+
+/* 幸运28 样式微调 */
+.bet_panel .bet_box p.ball_5x{ width: 1.3rem; margin: 0.1rem 0.05rem; padding: 0.1rem 0 0;}
+.bet_panel .bet_box p.ball_5x.active { background:url(/static/frist/images/bg_gradient.png) repeat-x #3ab6ec; background-size: auto 100%; color: #fff; border-color: #3ab6ec;}
+
+/* 开奖资讯 */
+.so-in-main .so-m-t-left div:last-child a { line-height: 0.46rem; background-color: #224e6b; color: #fff; border:none; border-radius: 0.1rem; }
+.last-open-num > ul{ text-align: right; padding-right: 0.1rem;}
+.so-in-main .so-m-t-right .last-open-num ul li{text-align: center;}
+.so-in-main .so-m-t-right .last-open-num ul li.round_ball { float: none;}
+.so-in-main .so-m-t-right .last-open-dou ul{text-align: right;}
+.so-in-main .so-m-t-right .last-open-dou ul li{ display: inline-block; float: none; margin-left: -4px; border-color: #bababa; border-radius: 0.1rem;}
+.last-date, .now-date, .so-in-main .so-main-down ul li > a{ color: #224e6b;}
+.so-con-left ul li a { color: #5f5f5f; }
+.so-con-left ul li.active { background: none; background-color: #224e6b; }
+
+/* bet footer */
+.so-foot{ background-color: #4f4f4f;}
+.so-foot .bet_selected p span { color: #3cb5ec;}
+.so-foot .bet_count input{ width: 2.8rem; padding: 0 0.1rem; border-radius: 0.1rem; color: #3cb5ec; margin-top:0.23rem;}
+.so-foot .bet_btn{}
+.so-foot .bet_btn > div{ width: 2.5rem;background: url('/static/frist/images/bg_gradient.png') repeat-x #3ab6ec; background-size: auto 100%;}
+.so-foot .bet_btn > div:after{display: none;}
+.so-foot .bet_btn > div:before{ display: inline-block; vertical-align: middle; transform: none; float: none;}
+.so-foot .bet_btn > div p{ display: inline-block; vertical-align: middle; transform: none; margin:0 0 0 0.2rem; line-height: 1.36rem;}
+.so-foot .bet_count a.submit {border-radius: 0.1rem; width: 1.1rem; line-height: 0.6rem; right:0.4rem;bottom:0.36rem;}
+
+/* bet 右侧选单 */
+/* bet 下注清单 */
+
+/* tab */
+.tab_mid{ background-color: #fff;}
+.tab_mid > li > a { color: #4f4f4f;}
+.tab_mid > li.on:after { background-color: #3cb5ec;}
+
+/* -----------------------------------------
+// 投注纪录
+-----------------------------------------*/
+
+/* 列表 */
+.bet_data > a{ color: #4f4f4f;}
+.bet_data strong{ color:#3cb5ec; }
+.bet_data .prd_num{ color: #aaaaaa;}
+
+/* -----------------------------------------
+// 往期开奖
+-----------------------------------------*/
+
+/* 筛选选单 */
+.play_area ul li a{ border-color: #aaaaaa;}
+.play_area .sort > div::after{content: ''; display: table; clear: both;}
+.play_area .sort > div > div{width: 48%; display: block;float: left;}
+.play_area .sort > div > div:first-child { margin-right: 4%;}
+.play_area .new_btn{ width: 100%; margin: 0; box-sizing: border-box;}
+.play_area .new_btn span{ width: auto; line-height: 1rem;}
+.play_area ul li.active a { background: url('/static/frist/images/bg_gradient.png') repeat-x #3ab6ec; background-size: auto 100%; border-color: #3cb5ec;}
+
+
+/* 列表 */
+.play_th .prd_num { color:#3cb5ec; }
+
+/* 往期开奖 */
+/* k3 往期开奖 */
+/* pk10 往期开奖 */
+
+/* -----------------------------------------
+// 双面长龙
+-----------------------------------------*/
+
+.ds_long ul.lo_ball { color: #3cb5ec; }
+
+/* -----------------------------------------
+// 路珠
+-----------------------------------------*/
+
+.new_road .tab_mid > li.on{background: url('/static/frist/images/bg_gradient.png') repeat-x #3ab6ec; background-size: auto 100%;}
+
+.new_road .road > ul > li { background: url(/static/frist/images/ball/road.png) no-repeat transparent; background-size: 3rem 0.8rem; box-shadow: 2px 2px 1px rgba(134, 134, 134, 0.3); }
+.new_road .road > ul > li:after{ display: none;}
+.new_road .road > ul > li.mid { background-color: transparent; background-position-x: -2rem; }
+.new_road .road > ul > li.dragon,
+.new_road .road > ul > li.big,
+.new_road .road > ul > li.odd { background-color: transparent; background-position-x: -1rem; }
+.new_road .road > ul > li.tiger,
+.new_road .road > ul > li.small,
+.new_road .road > ul > li.even { background-color: transparent; background-position-x: 0; }
+
+/* -----------------------------------------
+// 大厅
+-----------------------------------------*/
+#index_content.content > section h3{border-bottom: none;}
+/* banner */
+
+/* 跑马灯 */
+.marquee > .news_title { padding: 0 0.3rem; }
+.sys-notice .bd{ width: 7.2rem;margin-left: 2.8rem;}
+
+/* 快速连结 */
+.account_area{margin-bottom: 0;}
+
+/* 热门游戏 */
+.hotgame_area {  background:url(/static/frist/images/bg_hotgame.jpg) no-repeat ; background-size: 100% 100%; margin-bottom: 0rem; padding: 0.4rem 0.2rem;}
+.hotgame_area ul > li { width: 2.5rem; margin: 0.2rem; border-bottom: none; background-color: rgba(255, 255, 255, 0.8); border-radius: 0.1rem; box-shadow: 0 0 0px 1px #69a7c8; }
+.hotgame_area .badge { width: auto; }
+
+/* 合作加盟 */
+.cooper_area .cooper{margin: 0; margin-bottom: 0.3rem; background-color: #224e6b;}
+.cooper_area .cooper > ul > li a { color: #fff; text-decoration: underline;}
+
+/* 优惠活动 */
+.promoindex_area { background-color: #224e6b;}
+.promoindex_area h3 a{ color: #fff; border: 0; text-decoration: underline;}
+.promoindex_area h3 a:after{ content: ' >';}
+.promo_area img{ width: 9rem; margin: 0px auto;} 
+.promo_area .promo_list li h3{ float: none; text-align: center;}
+.promo_area .promo_list .btn_detail{text-align: center;}
+.promo_area .promo_list .btn_detail a { color: #3cb5ec; line-height: 0.7rem; }
+
+/* -----------------------------------------
+// 大厅往期开奖
+-----------------------------------------*/
+
+/* -----------------------------------------
+// 登入页
+-----------------------------------------*/
+
+#pa_con.page_login{ background-color: #eaeaea;}
+.page_login .login_area{ margin-top: 9rem;}
+.page_login .new_panel{background-color: transparent;}
+.login_area .new_btn{ width: 100%; margin: 0; box-sizing: border-box; color: #fff; background-color:#3cb5ec; border:none; }
+.login_area .new_btn span{ width: auto; line-height: 1rem;}
+.login_title{ top: 7.6rem; /*background-image: url(/static/frist/images/login_logo.gif);*/ height: 1.6rem;}
+.login_title:after{ content: ''; display: block; position: absolute; left: 1.8rem; top: 0.02rem; width: 1.067rem; height: 0.5733rem; background: url(/static/frist/images/logo_fire.gif) no-repeat; background-size: 100% 100%; }
+.other_link > a{border-color: #aaaaaa;}
+
+/* -----------------------------------------
+// 表单
+-----------------------------------------*/
+.form_g{ border: 1px  solid #aaaaaa; background-color: #fff; border-radius: 0.1rem;}
+.form_g > legend{ color: #4f4f4f;}
+.form_g > input {color: #3cb5ec;}
+.form_g.text input, .form_g.text select { color: #3cb5ec;}
+
+/* -----------------------------------------
+// 个人中心
+-----------------------------------------*/
+/* 个人中心 */
+.info_top{ height: 3.6rem;}
+.info_top .account{ margin-left: 3rem;}
+.info_top .account .user_name .icon_user {background-position:-5.76rem -0.64rem}
+.info_top .account .user_name .icon_money {background-position:-0.64rem -0.64rem;}
+.info_top .account .user_name strong{ color: #4f4f4f;}
+.info_top .account .user_name .purse .so-in-top-sum { color: #4f4f4f; }
+
+/* 帐户管理 */
+.password_area > div::after{ display: table; clear: both; content: '';}
+.password_area > div > div { margin-top: 0.3rem; display: block; float: left; width: 48%;}
+.password_area > div > div:first-child{margin-right: 4%;}
+.info_personal input{ background-color: #fff; border: 1px solid #aaaaaa; border-radius: 0.1rem;}
+.info_personal a{ float: right; color: #3cb5ec; }
+.info_mid > div > div:first-child{display: block; float: left;}
+.info_mid > div > div:last-child{display: block; float: right;}
+.info_mid .new_btn{margin-left: 0; margin-right: 0; width: 4.5rem;}
+.info_mid > div::after{content: ''; display: table; clear: both;}
+.info_bot > ul > li > a .icon_account{ background-color: #fff; box-shadow: 0px 0px 0px 1px #3cb5ec inset; -webkit-box-shadow: 0px 0px 0px 1px #3cb5ec inset;}
+
+/* 个人消息 */
+.message_area .item {  border-color: #ececec; }
+.message_area .item .badge { border: 1px solid #3cb5ec; background-color: transparent;}
+.message_area .item a{ color: #3cb5ec; }
+.message_area .item .title h2{ color: #3cb5ec; }
+/*.message_area .item.read { color: #bababa; opacity: 1; }
+.message_area .item.read a { color: #bababa; }
+.message_area .item.read .badge{box-shadow: 0 0 0 1px #bababa inset;}*/
+
+/* 帐户明细 状态标签 */
+
+/* -----------------------------------------
+// 充值
+-----------------------------------------*/
+.arrow_list_dark .badge{background-color: #fff; box-shadow: 0px 0px 0px 1px #3cb5ec inset; -webkit-box-shadow: 0px 0px 0px 1px #3cb5ec inset;}
+
+/* 选择银行 */
+
+/* -----------------------------------------
+// 提现
+-----------------------------------------*/
+.withdrawals_area .new_btn{ width: 100%; margin: 0; box-sizing: border-box;}
+.withdrawals_area .new_btn span{ width: auto; line-height: 1rem;}
+
+.print_data .copy_link { color: #3cb5ec; }
+.print_data table tr td.text-yellow { color: #3cb5ec; }
+.print_data table tr th { color: inherit; }
+.print_data table tr td { color: #3cb5ec;}
+
+.bank_account h5 { color: #3cb5ec; }
+.bank_account .mini_tip { color: #3cb5ec; }
+
+
+/* -----------------------------------------
+// K3
+-----------------------------------------*/
+
+/* -----------------------------------------
+// PK10
+-----------------------------------------*/
+#pk10 .pk10_top_detail{ margin-right: 0.05rem;}
+
+/* -----------------------------------------
+// lhc
+-----------------------------------------*/
+

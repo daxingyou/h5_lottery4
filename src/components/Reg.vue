@@ -41,16 +41,16 @@
                                     <fieldset  v-if="show">
                                         <div class="form_g password">
                                             <legend>登录密码</legend>
-                                            <input type="password" placeholder="请输入密码" v-model="password" autocomplete="off" class="password" @input="checkpassword(password,'password')" >
-                                            <i class="icon icon_eye active eye1"  @click="showPassword('eye1')"></i>
+                                            <input type="password" placeholder="请输入密码" v-model="userPd" autocomplete="off" class="password" @input="checkpassword(userPd,'password')" >
+                                            <i class="icon icon_eye"  @click="showPassword('eye1')"></i>
                                         </div>
                                         <label class="error-message "></label>
                                     </fieldset>
                                     <fieldset v-if="!show">
                                         <div class="form_g password">
                                             <legend>登录密码 </legend>
-                                            <input type="text" placeholder="请输入密码" v-model="password" autocomplete="off" class="password" @input="checkpassword(password,'password')" >
-                                            <i class="icon icon_eye act1" @click="showPassword('act1')"></i>
+                                            <input type="text" placeholder="请输入密码" v-model="userPd" autocomplete="off" class="password" @input="checkpassword(userPd,'password')" >
+                                            <i class="icon icon_eye active" @click="showPassword('act1')"></i>
                                         </div>
                                         <label class="error-message "></label>
                                     </fieldset>
@@ -60,7 +60,7 @@
                                          <div class="form_g password">
                                              <legend>确认密码</legend>
                                              <input type="password" placeholder="请输入确认密码" autocomplete="off" v-model="confirmpassword" class="confirmpassword" @input="checkIsEqual('.confirmpassword')" >
-                                             <i class="icon icon_eye active eye2" @click="showPassword('eye2')"></i>
+                                             <i class="icon icon_eye " @click="showPassword('eye2')"></i>
                                          </div>
                                          <label class="error-message "></label>
                                      </fieldset>
@@ -68,7 +68,7 @@
                                          <div class="form_g password">
                                              <legend>确认密码</legend>
                                              <input type="text" placeholder="请输入确认密码" autocomplete="off"  v-model="confirmpassword" class="confirmpassword" @input="checkIsEqual('.confirmpassword')" >
-                                             <i class="icon icon_eye " @click="showPassword('act2')"></i>
+                                             <i class="icon icon_eye active " @click="showPassword('act2')"></i>
                                          </div>
                                          <label class="error-message "></label>
                                      </fieldset>
@@ -76,17 +76,17 @@
                                 <div class="" v-if="withPasswordObj.ifView">
                                     <fieldset  v-if="showB">
                                         <div class="form_g password">
-                                            <legend>支付密码</legend>
-                                            <input type="password" placeholder="请输入4位数字支付密码" maxlength="4" v-model="withPassword" class="withPassword" @input="checkNum(withPassword,'withPassword')" >
-                                            <i class="icon icon_eye active eye3" @click="showPassword('eye3')"></i>
+                                            <legend>取款密码</legend>
+                                            <input type="password" placeholder="请输入4位数字取款密码" maxlength="4" v-model="withPassword" class="withPassword" @input="checkNum(withPassword,'withPassword')" >
+                                            <i class="icon icon_eye" @click="showPassword('eye3')"></i>
                                         </div>
                                         <label class="error-message "></label>
                                     </fieldset>
                                     <fieldset  v-if="!showB">
                                         <div class="form_g password">
-                                            <legend>支付密码</legend>
-                                            <input type="text" placeholder="请输入4位数字支付密码" maxlength="4" v-model="withPassword" class="withPassword" @input="checkNum(withPassword,'withPassword')" >
-                                            <i class="icon icon_eye " @click="showPassword('act3')"></i>
+                                            <legend>取款密码</legend>
+                                            <input type="text" placeholder="请输入4位数字取款密码" maxlength="4" v-model="withPassword" class="withPassword" @input="checkNum(withPassword,'withPassword')" >
+                                            <i class="icon icon_eye active " @click="showPassword('act3')"></i>
                                         </div>
                                         <label class="error-message "></label>
                                     </fieldset>
@@ -115,6 +115,7 @@
                                     <div class="form_g text ">
                                         <legend style="width: 1.6rem">选择银行</legend>
                                         <select name="" v-model="bankId" class="bankselect">
+                                            <option value="" >请选择</option>
                                             <option :value="bank.id" v-for="bank in bankList" :data-code="bank.bankCode" >{{bank.bankName}}</option>
                                         </select>
                                         <span class="icon icon_arrow_down"></span>
@@ -242,8 +243,8 @@
                             </fieldset>
                             <fieldset  v-if="!showB">
                                 <div class="form_g password">
-                                    <legend>支付密码</legend>
-                                    <input type="text" placeholder="请输入4位数字支付密码" maxlength="4" v-model="withPassword" class="withPassword" @input="checkNum(withPassword,'withPassword')">
+                                    <legend>取款密码</legend>
+                                    <input type="text" placeholder="请输入4位数字取款密码" maxlength="4" v-model="withPassword" class="withPassword" @input="checkNum(withPassword,'withPassword')">
                                     <i class="icon icon_eye " @click="showPassword('act3')"></i>
                                 </div>
                                 <label class="error-message "></label>
@@ -301,7 +302,7 @@
             return {
                 tjrusername :'',
                 username :'',
-                password :'',
+                userPd :'',
                 confirmpassword :'',
                 realyname :'',
                 telephone :'',
@@ -412,7 +413,7 @@
                 if(this.username==this.tjrusername){
                     this.$refs.autoCloseDialog.open('账号不能与推荐人账号相同') ;
                     return false ;
-                }else if(this.confirmpassword !== this.password){
+                }else if(this.confirmpassword != this.password){
                     this.$refs.autoCloseDialog.open('两次密码输入不一致');
                     return false ;
                 }
@@ -461,7 +462,7 @@
                         this.$refs.autoCloseDialog.open('请输入确认密码') ;
                         return false ;
                     }
-                    if(this.confirmpassword !== this.password){
+                    if(this.confirmpassword !== this.userPd){
                         this.$refs.autoCloseDialog.open('两次密码输入不一致');
                         return false ;
                     }
@@ -488,7 +489,7 @@
                 }
                 if(!!this.withPasswordObj.ifRequired){
                     if(this.withPassword ==''|| !this.positiveNum(this.withPassword)){
-                        this.$refs.autoCloseDialog.open('请输入4位数字支付密码') ;
+                        this.$refs.autoCloseDialog.open('请输入4位数字取款密码') ;
                         return false ;
                     }
                 }
@@ -541,7 +542,7 @@
                     login: _self.username ,   // 帐号
                     method: 'mc',   //方法：mc创建会员
                     oddType: 'a',  //盘口，1位字符，预留
-                    password: _self.password ,  // 用户登录密码
+                    password: _self.userPd ,  // 用户登录密码
                     realName: _self.realyname ,  // 用户真实姓名
                     mobile: _self.telephone , // 手机号码
                     passwordPay: _self.withPassword ,   //取款密码
@@ -549,8 +550,8 @@
                     code: _self.yzmcode ,   // 验证码
                     bankCode:_self.bankCode, //银行卡code
                     bankAddress:_self.bankAdd,//银行卡地址
-                    bankCard:_self.bankNum //银行卡号码
-
+                    bankCard:_self.bankNum, //银行卡号码
+                    source:2,
                 }
                 $.ajax({
                     type: 'post',

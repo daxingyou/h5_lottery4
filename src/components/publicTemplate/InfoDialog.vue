@@ -14,6 +14,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'InfoDialog',
   props:['text'],
@@ -35,7 +36,7 @@ export default {
         this.content = text;
         this.show = true;
         this.typeStr = title_tip;
-        setTimeout(() => this.show = false, this.delay);
+        setTimeout(() => this.close(), this.delay);
     },
     //关闭弹窗
     close:function(e){

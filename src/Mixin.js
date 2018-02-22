@@ -5,6 +5,10 @@
 //mixin.js
 // var  API_ROOT ='http://api.88bccp.com';
 
+
+import playTreeList from './PlayTreeList'
+import playTreeIndexByCid from './PlayTreeIndexByCid'
+
 var MyMixin = {
     data:function(){
         return {
@@ -26,6 +30,7 @@ var MyMixin = {
                 rootBalance:'',
             },
             playTreeList:[], //玩法树
+            playTreeIndexByCid: {},     
             testPriodDataNewlyData:{
               "data" : [ {
                 "version" : 0,
@@ -181,7 +186,7 @@ var MyMixin = {
         },
         // 初始化滚动高度
         setInitHeight:function (lotteryid) {
-            var conth = $('.so-con-right .item_one').height() ;
+            var conth = $('.so-con-right .item_one.active').height() ;
            this.setClickHeight(conth) ;
             if(lotteryid == '6'){
                 /* var div = document.getElementById("k3-item0");
@@ -205,14 +210,17 @@ var MyMixin = {
         },
         // 点击切换 设置球区域高度
         setClickHeight:function (val) {
-            var winw = window.screen.width || window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; // 获取屏幕宽度
-            if(winw >413){ // 大屏幕
-                $('.so-con-right').css('height',(val-380)+'px') ;
-            }else if(winw>300 && winw<375){ // 小屏幕
-                $('.so-con-right').css('height',(val-270)+'px') ;
-            }else{
-                $('.so-con-right').css('height',(val-310)+'px') ;
-            }
+            // var winw = window.screen.width || window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight; // 获取屏幕宽度
+            // if(winw >413){ // 大屏幕
+            //     $('.so-con-right').css('height',(val-218)+'px') ;
+            // }else if(winw>300 && winw<375){ // 小屏幕
+            //     $('.so-con-right').css('height',(val-218)+'px') ;
+            // }else{
+            //     $('.so-con-right').css('height',(val-310)+'px') ;
+            // }
+            var winH = this.getCookie('scrollF')?this.getCookie('scrollF'):window.innerHeight
+            let scrolling_height = winH  - ($('.so-in-top').height() + $('.so-in-main').height() + $('.so-foot').height())
+            $('.so-con-right').css('height',(val - scrolling_height)+'px') ;
         },
 
         ajax:function(userConfig){
@@ -250,19 +258,48 @@ var MyMixin = {
             }
         },
 
+
         // 玩法树
         loadPlayTree:function(gameid) {
             var _self = this ;
             return new Promise((resolve, reject)=>{
+                let maxUpdateTime = ""
+                let playTree
+
+                /* if browser support localStorage */
+                if (typeof(Storage) !== "undefined") {
+                    // Code for localStorage/sessionStorage.
+                    playTree = JSON.parse(localStorage.getItem("playTree" + gameid))
+                    if (playTree) {
+                        if (localStorage.getItem("maxUpdateTime" + gameid))
+                            maxUpdateTime = localStorage.getItem("maxUpdateTime" + gameid)
+                    }
+                }
                 $.ajax({
                     type: 'get',
                     headers: {
                         "Authorization": "bearer  " + _self.getAccessToken,
                     },
                     url: this.action.forseti + 'api/playsTree',
-                    data: {lotteryId: gameid,}, // 当前彩种id
+                    data: {lotteryId: gameid, maxUpdateTime: maxUpdateTime}, // 当前彩种id
+                    dataType: 'json',
                     success: (res) => {
-                        this.playTreeList = res.data ? res.data.childrens :[];
+                        let mydata
+                        if (res.data) {
+                            localStorage.setItem("playTree" + gameid, JSON.stringify(res.data.childrens))
+                            localStorage.setItem("maxUpdateTime" + gameid, res.maxUpdateTime)
+                            mydata = res.data.childrens
+                        }
+                        else {
+                            mydata = playTree
+                        }
+
+                        playTreeList.set(mydata)
+                        playTreeIndexByCid.set(mydata)
+                        this.$set(this, 'playTreeList', mydata)
+                        this.$set(this, 'playTreeIndexByCid', mydata)
+                        this.setCookie('scrollF',window.innerHeight)
+
                      setTimeout(function () {
                          _self.setInitHeight(gameid) ;
                      },200) ;
@@ -278,6 +315,7 @@ var MyMixin = {
             });
 
         },
+
 
         // 最新开奖期数
         priodDataNewly:function(gameid, sys_time) {
@@ -395,13 +433,14 @@ var MyMixin = {
             var leftTopHeight = $('.so-l-c-top').height();
             $('.so-l-c-con').height((viewHeight - leftTopHeight) + 'px');
         },
+  
 
         //禁止遮罩层以下屏幕滑动
         touchmove :function(){
             $(document).on("touchmove", function (e) {
                 var e = e || event,
                     target = e.target || e.srcElement;
-                if (e.target.className.indexOf("so-shade") >= 0) { //className為弹窗的蒙层的类名
+                if (e.target.className.indexOf("so-shade") >= 0|| e.target.className.indexOf("so-left-con") >= 0) { //className為弹窗的蒙层的类名
                     e.preventDefault();
                 }
             });
@@ -466,7 +505,8 @@ var MyMixin = {
         formatTime:function(second, type) {
             var bk;
             if (type == 0) {
-                var h = parseInt(second / 3600);
+                var d = parseInt( second /(3600*24) )   
+                var h = parseInt( second % (3600*24)/3600  );
                // var h = Math.floor(second / 3600);
                 var f = parseInt(second % 3600 / 60);
                // var f = Math.floor((second - (h * 60 * 60)) / 60);
@@ -475,6 +515,9 @@ var MyMixin = {
               // second --;
               bk = (h < 10 ? "0" + h : h)+ ":" + (f < 10 ? "0" + f : f) + ":" + (s < 10 ? "0" + s : s)
               // bk = h + ":" + (f < 10 ? "0" + f : f) + ":" + (s < 10 ? "0" + s : s)
+               if(d){
+                    bk = (d + "天")+ ":" +  (h < 10 ? "0" + h : h)+ ":" + (f < 10 ? "0" + f : f) + ":" + (s < 10 ? "0" + s : s)
+                }
             } else {
                 bk = second.split(":");
                 bk = parseInt(bk[0] * 3600) + parseInt(bk[1] * 60) + parseInt(bk[2])
@@ -586,7 +629,6 @@ var MyMixin = {
         },
         //清除所有cookie函数
          clearAllCookie:function() {
-            console.log('清除cookie') ;
              this.setCookie("access_token", '');  // 登录token
              this.setCookie("username", '');  //  登录用户名
              this.setCookie('acType','');   // 玩家类型
@@ -754,8 +796,44 @@ var MyMixin = {
         },
         //验证支付密码
         checkNum: function (val,el) {
-            var content = '请输入4位数字支付密码' ;
+            var content = '请输入4位数字取款密码' ;
             if(val &&!this.positiveNum(val) ||val.length<4){
+                $('.'+el).parent('.form_g').next('.error-message').addClass('red').text(content) ;
+            }
+            else{
+                $('.'+el).parent('.form_g').next('.error-message').removeClass('red').text('') ;
+            }
+            if(val ==''){
+                $('.'+el).parent('.form_g').next('.error-message').removeClass('red').text('') ;
+            }
+        },
+        checkeMail:function (val,el) {
+            var content = '请输入正确邮箱地址' ;
+            if(val &&!this.checkEmail(val)){
+                $('.'+el).parent('.form_g').next('.error-message').addClass('red').text(content) ;
+            }
+            else{
+                $('.'+el).parent('.form_g').next('.error-message').removeClass('red').text('') ;
+            }
+            if(val ==''){
+                $('.'+el).parent('.form_g').next('.error-message').removeClass('red').text('') ;
+            }
+        },
+        checkQQ:function (val,el) {
+            var content = '请输入正确QQ号' ;
+            if(val &&!this.checkqq(val)){
+                $('.'+el).parent('.form_g').next('.error-message').addClass('red').text(content) ;
+            }
+            else{
+                $('.'+el).parent('.form_g').next('.error-message').removeClass('red').text('') ;
+            }
+            if(val ==''){
+                $('.'+el).parent('.form_g').next('.error-message').removeClass('red').text('') ;
+            }
+        },
+        checkWx:function (val,el) {
+            var content = '请输入正确微信账号' ;
+            if(val &&!this. checkWechat(val)){
                 $('.'+el).parent('.form_g').next('.error-message').addClass('red').text(content) ;
             }
             else{
@@ -805,6 +883,35 @@ var MyMixin = {
             })
         },
         //网站说明文案
+        // getCopyright:function (type,code) {
+        //     var _self=this;
+        //     var senddata={
+        //         type:type,
+        //         code:code};
+        //     $.ajax({
+        //         type: 'get',
+        //         url: _self.action.forseti + 'apid/cms/copyright',
+        //         data: senddata ,
+        //         success: function(res){
+        //             var wordObj = {}                    
+        //             if(res.err=="SUCCESS"){
+        //                 if(res.data[0].title){                         
+        //                     _self.copyTitle=res.data[0].title;
+        //                     _self.copyContent=res.data[0].content;
+        //                     wordObj.copyTitle = _self.copyTitle;
+        //                     wordObj.copyContent = _self.copyContent;
+        //                     var freshEducation = 'freshEducation' + code
+        //                     localStorage.setItem(freshEducation, JSON.stringify(wordObj))
+        //                 }
+        //             }
+        //         },
+        //         error: function (res) {
+
+        //         }
+        //     })
+        // },
+
+
         getCopyright:function (type,code) {
             var _self=this;
             var senddata={
@@ -815,20 +922,29 @@ var MyMixin = {
                 url: _self.action.forseti + 'apid/cms/copyright',
                 data: senddata ,
                 success: function(res){
-                    if(res.err=="SUCCESS"){
-                        if(res.data[0].title){
-                            _self.copyTitle=res.data[0].title;
+                    console.log(!res.data)
+                    if (res.data[0]) {
+                        if(res.err=="SUCCESS"){
                             _self.copyContent=res.data[0].content;
+                            _self.copyTitle=res.data[0].title;
+
+                             _self.tabShow = true
+
+                            console.log(_self.copyContent,'cont' )
                         }
+                    } else {
+                        _self.copyContent = res.data[0];
+                        _self.tabShow = true
+
 
                     }
-
                 },
                 error: function (res) {
 
                 }
             })
         },
+
         //试玩
         demoPlay :function () {
             var _self=this;

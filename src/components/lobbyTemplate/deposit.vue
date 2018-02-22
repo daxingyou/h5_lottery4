@@ -32,11 +32,14 @@
                                     <div class="step03 pay_way  payWayNet payWayTranster"  v-if = 'netPayShow'>
                                         <ul class="arrow_list_dark">
                                             <li v-for = '(payWay,key) in payWays' >
-                                                <a class="item" href="javascript:;" :data-hf="payWay.rsUrl" :data-type='payWay.rsNameId'  :data-val="payWay.flag" @click=" choosePayMoth($event)" >
+                                                <a class="item" href="javascript:;" :data-hf="payWay.rsUrl" :data-type='payWay.rsNameId'  :data-val="payWay.flag" @click=" choosePayMoth($event,payWay)" >
                                                     <span class="badge">
                                                         <span class="icon_account " :class="'icon_deposit_net'+payWay.rsNameId"></span>
                                                     </span>
-                                                    <span>{{ payWay.rsName}}</span>
+                                                    <span class="limitMoney" >
+                                                        <span>{{ payWay.rsName}}</span>
+                                                       <!--  <span  v-if=' payWay.rsNameId!=0'>限额：{{parseInt(payWay.minDepositAmount/100) }}~{{ parseInt(payWay.maxDepositAmount/100)  }}</span> -->
+                                                    </span>
                                                     <span class="icon icon_arrow_light"></span>
                                                 </a>
                                             </li>
@@ -132,7 +135,7 @@
 
                                     <div class="bank_transfer">
                                         <div class="before_pay">
-                                            <fieldset>
+                                          <!--   <fieldset>
                                                 <div class="form_g text">
                                                     <legend>选择银行</legend>
                                                     <select name="" v-model="bankInfo.bankCode">
@@ -141,10 +144,10 @@
                                                     </select>
                                                     <span class="icon icon_arrow_down"></span>
                                                 </div>
-                                            </fieldset>
+                                            </fieldset> -->
                                         </div>
 
-                                        <div class="bank_account">
+                                        <div class="bank_account"  id='bankInforDeposit'>
                                             <h5 class="push-left-tiny">收款账号</h5>
                                             <a class="mini_tip trans_step" href="javascript:;">
                                                 <span class="icon icon_question"></span>转账步骤</a>
@@ -156,31 +159,43 @@
                                                             <li>银行名称</li>
                                                         </th>
                                                         <td>{{userInfo.bankName}}</td>
+                                                        <td :data-clipboard-text='userInfo.bankName' class="text_name"
+                                                            @click='copyName($event)'>复制
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <th>
                                                             <li>收款人</li>
                                                         </th>
                                                         <td>{{userInfo.cardOwnerName}}</td>
+                                                        <td :data-clipboard-text='userInfo.cardOwnerName'
+                                                            class="text_people" @click='copyName($event)'>复制
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <th>
                                                             <li>开户行</li>
                                                         </th>
                                                         <td>{{userInfo.registerBankInfo}}</td>
+                                                         <td :data-clipboard-text='userInfo.registerBankInfo'
+                                                            class="text_bank" @click='copyName($event)'>复制
+                                                        </td>
                                                     </tr>
                                                     <tr>
                                                         <th>
                                                             <li>银行账号</li>
                                                         </th>
                                                         <td>{{userInfo.cardNo}}</td>
+                                                         <td :data-clipboard-text='userInfo.cardNo' class="text_count"
+                                                            @click='copyName($event)'>复制
+                                                        </td>
                                                     </tr>
                                                     </thead>
                                                 </table>
-                                                <a class="copy_link js-textareacopybtn copy-text" href="javascript:;"  @click="copyText()"
+                                               <!--  <a class="copy_link js-textareacopybtn copy-text" href="javascript:;"  @click="copyText()"
                                                    :data-clipboard-text="'银行名称：'+userInfo.bankName+' 收款人：'+userInfo.cardOwnerName +' 开户行：'+userInfo.registerBankInfo +' 银行账号：'+userInfo.cardNo"
                                                 >
-                                                    <span class="icon icon_copy"></span>复制该信息</a>
+                                                    <span class="icon icon_copy"></span>复制该信息</a> -->
                                             </div>
                                         </div>
                                         <div class="before_pay">
@@ -194,8 +209,10 @@
                                             <fieldset>
                                                 <div class="form_g text">
                                                     <legend for="">存款人</legend>
-                                                    <input type="text" placeholder="请输入存款人姓名" v-model="banksavename">
+                                                    <input type="text" placeholder="请输入存款人姓名" v-model="banksavename" @input=  "depositPeopleInput(banksavename)"/>
                                                 </div>
+                                                <div  v-if = 'depositPeopleHint' class="depositPeopleHint" id = "depositPeopleHint"> {{depositPeoplehintWord}} </div>
+                                                
                                             </fieldset>
                                             <fieldset>
                                                 <div class="form_g text">
@@ -351,7 +368,10 @@
                 hintContent:'',
                 notNetPayShow:true,
                 netPayShow:true,
-                href:''
+                href:'',
+                depositPeoplehintWord:'请正确输入',
+                depositPeopleHint:false,
+                bankSubmitAllow: true,
 
             }
         },
@@ -364,7 +384,6 @@
 
             var _self = this ;
             $('html,body').css('overflow-y','scroll' )  ;
-//            _self.choosePayMoth() ;
             _self.bankTipShow() ;
             setTimeout(function () {
                 var now = new Date(),
@@ -430,29 +449,29 @@
                 });
             },
             // 选择支付方式
-            choosePayMoth:function (e) {
+            choosePayMoth:function (e,payWay) {
                 var _self = this ;
                 // 转账
-//                $('.payWayTranster').on('click','.item',function (e) {
-                if(_self.paymount =='' || !_self.isPositiveNum(_self.paymount)){
+
+                var notQuick = payWay.rsNameId
+
+                if( (notQuick != 0)&& (_self.paymount =='' || !_self.isPositiveNum(_self.paymount) ) ){
                     _self.$refs.autoCloseDialog.open('请输入正确的存款金额') ;
                     return false ;
                 }
-                // if( ( _self.paymount>=10000 ||_self.paymount<100)&&( Number(_self.paymount)!= 0  ) ){
-                //       _self.$refs.autoCloseDialog.open('存款金额必须在范围内') ;
-                //       return false ;
+         
+                // var limitF = ( _self.paymount * 100 > payWay.maxDepositAmount || _self.paymount * 100 < payWay.minDepositAmount) || ( Number(_self.paymount) == 0  )
+
+                // if ( notQuick&&limitF ) {
+                //     _self.$refs.autoCloseDialog.open('充值金额不符合限额要求');
+                //     return false;
                 // }
-                // 范围暂时取消，只是将限额确定在大于100
-                // if( (_self.paymount<100)||( Number(_self.paymount)!= 0  ) ){
-                //       _self.$refs.autoCloseDialog.open('存款最低金额100元') ;
-                //       return false ;
-                // }
+
                 var $src = $(e.currentTarget);
                 var type = $src.data('type');
                 var val= $src.data('val')
                 var Href=$src.data('hf')
                 if(val=='0'){
-
                     if(type == '10') {  // 网银支付
                         _self.getBankList('2');
                         $('.paymethods_all').hide();
@@ -510,10 +529,6 @@
                     url: _self.action.forseti + 'api/pay/receiptClient',
                     // data: { type: type},  // 查询类型：1 扫码支付，2 银行卡支付
                     success: function(res){
-                        //  console.log(res)
-                        // console.log( res.data.splice(0,4) )
-//                        res.data = res.data;
-//                    console.log(res.data)
                         _self.payWays = res.data;
                     },
                     error: function (e) {
@@ -584,7 +599,6 @@
                                 _self.submitpayflag = false ;
                                 if(res.data.dataType=='1'){ // 页面html
                                     var loadStr = res.data.html ;
-//                               console.log(loadStr) ;
                                     win.document.write(loadStr) ;
                                 }else if(res.data.dataType=='2'){ // 链接跳转
                                     var loadurl = res.data.url ;
@@ -687,6 +701,13 @@
                     }
                 });
             },
+            depositPeopleInput:function(word){
+                if( word.length<2||word.length>13 ){
+                    this.depositPeopleHint = true;
+                }else{
+                    this.depositPeopleHint = false;
+                }  
+            },
             // 银行转账 个人信息
             getBankInfo:function () {
                 var _self = this ;
@@ -700,10 +721,14 @@
                     success: function(res){
                         if(res.data){
                             _self.userInfo = res.data ;
+                        } else {
+                            _self.bankSubmitAllow = false;
                         }
 
                     },
                     error: function (e) {
+                        _self.bankSubmitAllow = false;
+
                         _self.errorAction(e) ;
                     }
                 });
@@ -730,15 +755,18 @@
             submitBankAction:function () {
                 var _self = this ;
                 if( _self.submitpayunflag){
-                    console.log('发货的')
                     return false ;
                 }
-                console.log('和积分抵扣')
+                
+                if (!(this.bankSubmitAllow)) {
+                    _self.$refs.autoCloseDialog.open('未获取到收款人信息');
+                    return false;
+                }
 
-                if(!_self.bankInfo.bankCode){
-                    _self.$refs.autoCloseDialog.open('请选择存款银行！') ;
-                    return false ;
-                }
+                // if(!_self.bankInfo.bankCode){
+                //     _self.$refs.autoCloseDialog.open('请选择存款银行！') ;
+                //     return false ;
+                // }
                 if(!_self.banksavename || !this.trueName(_self.banksavename)){
                     _self.$refs.autoCloseDialog.open('请输入正确的存款人姓名！') ;
                     return false ;
@@ -747,6 +775,12 @@
                     _self.$refs.autoCloseDialog.open('请选择存款方式！') ;
                     return false ;
                 }
+                if(_self.depositPeopleHint){
+                    _self.$refs.autoCloseDialog.open('输入正确的存款人姓名！') ;
+                    return false ;
+                }
+
+
                 _self.submitpayunflag = true ;
                 var userInfo = _self.userInfo ;
                 var senddata ={
@@ -771,7 +805,6 @@
                     url: _self.action.forseti + 'api/pay/offlineOrder',
                     data: senddata ,
                     success: function(res){
-                        console.log(res)
 
                         if(!res.data){
                             _self.$refs.autoCloseDialog.open(res.msg) ;
@@ -816,6 +849,30 @@
                     clipboard.destroy() ;
                 })  ;
             },
+             copyName: function (e) {
+                var _self = this;
+                var $src = $(e.currentTarget);
+                var claName = $src.data('claName');
+
+                var str = '.' + $src[0].classList.value
+
+                // var clipboard = new Clipboard('.text_name') ;
+                var clipboard = new Clipboard(str);
+
+                // var clipboard = new Clipboard(" '.'+$src[0].classList.value ") ;
+
+                clipboard.on('success', function (e) {
+                    _self.$refs.autoCloseDialog.open('复制成功！', '', 'icon_check', 'd_check');
+                    // 释放内存
+                    clipboard.destroy();
+                });
+                clipboard.on('error', function (e) {
+                    _self.$refs.autoCloseDialog.open('浏览器不支持自动复制，请手动复制！');
+                    // 释放内存
+                    clipboard.destroy();
+                });
+            },
+
             //在线支付
             onlinePay :function (rsNameId,type) {
                 var _self=this;
@@ -838,12 +895,10 @@
                     data: senddata,
                     success: function(res){ // dataType 1 线上入款 , 3 二维码
                         if(res.err == 'SUCCESS'){
-                            console.log('seccess')
                             if(type == '1'){ // 线上付款
                                 _self.submitpayflag = false ;
                                 if(res.data.dataType=='1'){ // 页面html
                                     var loadStr = res.data.html ;
-//                               console.log(loadStr) ;
                                     win.document.write(loadStr) ;
                                 }else if(res.data.dataType=='2'){ // 链接跳转
                                     $('.paymethods_all').show();
@@ -851,7 +906,6 @@
                                     win.location.href = loadurl ;
                                 }
                             }else if(type == '3'){  // 扫码支付
-                                console.log(!res.data + 'chongshi')
                                 if(!res.data){
                                     _self.$refs.autoCloseDialog.open('请重试！') ;
                                     setTimeout(function () {
@@ -929,7 +983,7 @@
     .bModal .m_content { position: fixed; z-index: 33; width: 8rem; top: 25%; left: 50%; margin-left: -4rem; /*padding: .3rem .5rem .7rem;*/box-sizing: border-box; background-color: #fff; border: 1px solid #dadada; border-radius: 0.1rem;word-wrap: break-word;}
     /*.modal .m_content:before { content: ''; position: absolute; display: block; top: -0.3rem; left: 0; z-index: 33; height: 1.173rem; width: 100%;  }*/
     /*.modal .m_content:after { content: ''; position: absolute; display: block; bottom: -0.3rem; left: 0; z-index: 33; height: 1.173rem; width: 100%;  }*/
-    @media (max-width: 359px) {.modal .m_content { width: 9rem; } }
+    @media (max-width: 359px) {.modal .m_content { width: 8rem; } }
     .bModal .m_content > *{ position: relative; z-index: 35;}
     .bModal .m_content h2 { line-height: 0.8rem; padding: 0.2rem; font-size: 0.45rem; font-weight: bold; font-style: italic; text-align: center; color: #52acd3; border-bottom: 1px solid #dadada;}
     .bModal .m_content h2 a { width: 0.64rem; height: 0.64rem; position: absolute; right: 0.1rem; top: 0.1rem; background: url("/static/frist/images/icon_sprite.svg") no-repeat -5.12rem -0.64rem; background-size: 6.4rem auto; }
@@ -947,4 +1001,33 @@
     .bModal > .m_content > .content > div > img { height: 1rem; display: block; margin: 0 auto; }
 
     .bModal > .m_content > .content > div > img:last-child { height: 0.8rem; margin: .2rem auto; }
+
+     .depositPeopleHint{
+        display: block;
+        padding-left: 2.444rem;
+        color: red;
+        font-size: 0.34rem;
+        height: 0.6rem;
+        line-height: 0.6rem;
+        /*background-color: rgba(0, 0, 0, 0.5);*/
+        margin-top: 0.185rem;
+    }
+
+
+    .limitMoney{
+        width: 2.346rem;
+        margin-top: 0.09615rem;
+    }
+    .limitMoney span:nth-of-type(1){
+        height: 0.577rem;        
+        line-height: 0.577rem;    
+        margin-top: 0.2rem;  
+
+    }
+     .limitMoney span:nth-of-type(2){
+        font-size: 0.2692rem;
+        height: 0.385rem;
+        line-height: 0.385rem;
+        margin-top: 0.05769rem;
+    }
 </style>

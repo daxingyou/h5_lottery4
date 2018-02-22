@@ -39,7 +39,7 @@
                 <div class="info_mid">
                     <div>
                         <div class="">
-                            <a class="new_btn" href="javascript:;" @click="CheckDemoPlay('TK')" ><span class="midunm">提款</span></a>
+                            <a class="new_btn kind" href="javascript:;" @click="CheckDemoPlay('TK')" ><span class="midunm">提款</span></a>
                         </div>
                         <div class="">
                             <a class="new_btn ok" href="javascript:;" @click="CheckDemoPlay('CZ')"><span class="midunm">充值</span></a>
@@ -87,6 +87,15 @@
                                 <span class="icon icon_arrow_dark"></span>
                             </a>
                         </li>
+                         <!--20180125 新增个人消息-->
+                        <li >
+                            <a class="btn_icon" @click= 'toMsg()' >
+                                <span class="icon_account icon_info_4"></span>
+                                <span>个人消息</span>
+                                <span class="icon icon_arrow_dark"></span>
+                            </a>
+                        </li>
+                        <!--end 20180125 新增个人消息-->
                         <!--<li>-->
                             <!--<router-link class="btn_icon" :to="'/lobbyTemplate/join'">-->
                                 <!--<div class="icon_account icon_info_4"></div>-->
@@ -152,6 +161,14 @@ export default {
         this.custUrl=localStorage.getItem('Url');
   },
     methods: {
+       toMsg:function(){
+        var type = this.getCookie('acType')
+        if(type==1){
+          this.$router.push( '/lobbyTemplate/notification' )
+        }else{
+           this.$refs.confirm.open();
+        }
+      } ,
       //获取用户信息
       getUserInfo: function () {
           var _self = this;
@@ -162,10 +179,12 @@ export default {
               url: _self.action.uaa + 'api/data/member/info',
               data: {},
               success: (res) => {
-                  _self.memberId = res.data.memberId;
-                  _self.acType = res.data.acType;
-                  _self.userLogin=res.data.login;
-                  _self.getBalance(_self.memberId, _self.acType)
+                  if(res.data){
+                      _self.memberId = res.data.memberId;
+                      _self.acType = res.data.acType;
+                      _self.userLogin=res.data.login;
+                      _self.getBalance(_self.memberId, _self.acType)
+                  }
               },
               error: (e) => {
                   _self.errorAction(e) ;

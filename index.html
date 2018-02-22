@@ -1,18 +1,18 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
 <html lang="cn">
-  <head>
+  <head id="head">
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="format-detection" content="telephone=no">
     <meta name="renderer" content="webkit">
-    <meta name="apple-mobile-web-app-title" content="时时彩票" >
+    <meta name="apple-mobile-web-app-title" content="神州彩票" >
 	<meta name="x5-orientation" content="portrait">  <!--QQ强制竖屏-->
     <meta name="screen-orientation" content="portrait"><!-- uc强制竖屏 -->
     <!--  <meta name="theme-color" content="#061626">
      <meta name="msapplication-navbutton-color" content="#061626">
      <meta name="apple-mobile-web-app-status-bar-style" content="#061626">-->
-    <title>时时彩票</title>
+    <title>神州彩票</title>
     <link href="/static/css/mobiscroll.css" rel="stylesheet" type="text/css">
     <script src="/static/js/flexible_css.js"></script>
     <script src="/static/js/flexible.debug.js"></script>
@@ -40,7 +40,26 @@
             s.parentNode.insertBefore(hm, s);
         })();
     </script>
+    <script type="text/javascript">
+    setTimeout(function(){
+         var urlhtml = '';
+         var iconhtml = {}
+         var re = '(?:; )?' + encodeURIComponent('siteData') + '=([^;]*);?';
+            re = new RegExp(re);
+            if (re.test(document.cookie)) {
+                urlhtml = decodeURIComponent(RegExp.$1);
+                iconhtml = JSON.parse(urlhtml )               
+            } 
+       
+        var head = document.getElementById('head')   
+        var link = document.createElement('link');
+        link.href = 'http://admin.baochiapi.com/photo/pic/'+iconhtml.iconUrl+'/0';
+        // link.href = 'http://img.will888.cn/photo/pic/'+iconhtml.iconUrl+'/0';//线上
+        link.rel = "Shortcut Icon";
+        head.appendChild( link );        
+    },2000)
+</script>
 
-    <div style="display:none"><script language="javascript" type="text/javascript" src="//js.users.51.la/19351752.js"></script></div>
+    <!-- <div style="display:none"><script language="javascript" type="text/javascript" src="//js.users.51.la/19351752.js"></script></div> -->
   </body>
 </html>
