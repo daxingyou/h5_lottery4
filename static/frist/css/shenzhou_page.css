@@ -169,6 +169,7 @@ p.active .xy28_ball.num_3, p.active .xy28_ball.num_6, p.active .xy28_ball.num_9,
 .bet_data strong{ color:#3cb5ec; }
 .bet_data .prd_num{ color: #aaaaaa;}
 .bet_data > a > .item > .badge { background-color: #3cb5ec;}
+.ac_detial_area .bet_data > a > .item > .badge { background-color: #fff;}
 
 /* -----------------------------------------
 // 往期开奖
@@ -309,6 +310,12 @@ p.active .xy28_ball.num_3, p.active .xy28_ball.num_6, p.active .xy28_ball.num_9,
 .arrow_list_dark .badge{background-color: #fff; box-shadow: 0px 0px 0px 1px #3cb5ec inset; -webkit-box-shadow: 0px 0px 0px 1px #3cb5ec inset;}
 
 /* 选择银行 */
+
+/* 钱包秒充 */
+.wallet_method_select a.active:after { background-color: #3cb5ec;}
+.wallet_account .wallet_account-copy { color: #3cb5ec; border-color: #3cb5ec; }
+.wallet_paymoney { color: #3cb5ec; }
+.wallet_msg { width: auto;}
 
 /* -----------------------------------------
 // 提现
