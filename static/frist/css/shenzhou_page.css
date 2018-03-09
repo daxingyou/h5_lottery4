@@ -311,6 +311,12 @@ p.active .xy28_ball.num_3, p.active .xy28_ball.num_6, p.active .xy28_ball.num_9,
 
 /* 选择银行 */
 
+/* 钱包秒充 */
+.wallet_method_select a.active:after { background-color: #3cb5ec;}
+.wallet_account .wallet_account-copy { color: #3cb5ec; border-color: #3cb5ec; }
+.wallet_paymoney { color: #3cb5ec; }
+.wallet_msg { width: auto;}
+
 /* -----------------------------------------
 // 提现
 -----------------------------------------*/
