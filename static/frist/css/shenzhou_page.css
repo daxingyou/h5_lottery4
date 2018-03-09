@@ -169,6 +169,7 @@ p.active .xy28_ball.num_3, p.active .xy28_ball.num_6, p.active .xy28_ball.num_9,
 .bet_data strong{ color:#3cb5ec; }
 .bet_data .prd_num{ color: #aaaaaa;}
 .bet_data > a > .item > .badge { background-color: #3cb5ec;}
+.ac_detial_area .bet_data > a > .item > .badge { background-color: #fff;}
 
 /* -----------------------------------------
 // 往期开奖
