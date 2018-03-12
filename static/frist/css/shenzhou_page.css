@@ -225,10 +225,11 @@ p.active .xy28_ball.num_3, p.active .xy28_ball.num_6, p.active .xy28_ball.num_9,
 .sys-notice .bd{ width: 7.2rem;margin-left: 2.8rem;}
 
 /* 快速连结 */
-.account_area{margin-bottom: 0;}
+.account_area{margin-bottom: 0; padding: 0.4rem 0.4rem 0; background:url(/static/frist/images/bg_account_area.jpg) no-repeat ; background-size: 100% 105%; }
+.account_area ul{ padding: 0.2rem 0; background-color: #fff; background-color: rgba(255, 255, 255, 0.8); border-radius: 0.1rem;}
 
 /* 热门游戏 */
-.hotgame_area {  background:url(/static/frist/images/bg_hotgame.jpg) no-repeat ; background-size: 100% 100%; margin-bottom: 0rem; padding: 0.4rem 0.2rem;}
+.hotgame_area {  background:url(/static/frist/images/bg_hotgame.jpg) no-repeat 0 -2px ; background-size: 100% 105%; margin-bottom: 0rem; padding: 0.4rem 0.2rem;}
 .hotgame_area ul > li { width: 2.5rem; margin: 0.2rem; border-bottom: none; background-color: rgba(255, 255, 255, 0.8); border-radius: 0.1rem; box-shadow: 0 0 0px 1px #69a7c8; }
 .hotgame_area .badge { width: auto; }
 
