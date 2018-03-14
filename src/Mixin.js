@@ -220,7 +220,11 @@ var MyMixin = {
             // }
             var winH = this.getCookie('scrollF')?this.getCookie('scrollF'):window.innerHeight
             let scrolling_height = winH  - ($('.so-in-top').height() + $('.so-in-main').height() + $('.so-foot').height())
-            $('.so-con-right').css('height',(val - scrolling_height)+'px') ;
+            if ( $('.jx11_tab').is(':visible')){
+                $('.so-con-right').css('height',(val - scrolling_height + 50)+'px') ;
+            } else {
+                $('.so-con-right').css('height',(val - scrolling_height )+'px') ;
+            }
         },
 
         ajax:function(userConfig){
@@ -626,6 +630,9 @@ var MyMixin = {
                 return decodeURIComponent(RegExp.$1);
             }
             return '';
+        },
+        deleteCookie:function(name) {
+            this.setCookie(name, '');
         },
         //清除所有cookie函数
          clearAllCookie:function() {
